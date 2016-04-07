@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Biglietti.findByCodiceBiglietto", query = "SELECT b FROM Biglietti b WHERE b.codiceBiglietto = :codiceBiglietto"),
     @NamedQuery(name = "Biglietti.findByDataValidita", query = "SELECT b FROM Biglietti b WHERE b.dataValidita = :dataValidita"),
     @NamedQuery(name = "Biglietti.findByDataPrenotazione", query = "SELECT b FROM Biglietti b WHERE b.dataPrenotazione = :dataPrenotazione")})
-public class Biglietti implements Serializable {
+public class Biglietto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,25 +57,25 @@ public class Biglietti implements Serializable {
         @JoinColumn(name = "CodiceBiglietto", referencedColumnName = "CodiceBiglietto")}, inverseJoinColumns = {
         @JoinColumn(name = "CodiceServizio", referencedColumnName = "CodiceServizio")})
     @ManyToMany
-    private Collection<Servizi> serviziCollection;
+    private Collection<Servizio> serviziCollection;
     @JoinColumn(name = "NomeUtente", referencedColumnName = "NomeUtente")
     @ManyToOne(optional = false)
-    private Utenti nomeUtente;
+    private Utente nomeUtente;
     @JoinColumn(name = "CodiceCategoria", referencedColumnName = "CodiceCategoria")
     @ManyToOne(optional = false)
-    private Categorie codiceCategoria;
+    private Categoria codiceCategoria;
     @JoinColumn(name = "CodiceVisita", referencedColumnName = "CodiceVisita")
     @ManyToOne(optional = false)
-    private Visite codiceVisita;
+    private Visita codiceVisita;
 
-    public Biglietti() {
+    public Biglietto() {
     }
 
-    public Biglietti(Integer codiceBiglietto) {
+    public Biglietto(Integer codiceBiglietto) {
         this.codiceBiglietto = codiceBiglietto;
     }
 
-    public Biglietti(Integer codiceBiglietto, Date dataValidita, Date dataPrenotazione) {
+    public Biglietto(Integer codiceBiglietto, Date dataValidita, Date dataPrenotazione) {
         this.codiceBiglietto = codiceBiglietto;
         this.dataValidita = dataValidita;
         this.dataPrenotazione = dataPrenotazione;
@@ -106,35 +106,35 @@ public class Biglietti implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Servizi> getServiziCollection() {
+    public Collection<Servizio> getServiziCollection() {
         return serviziCollection;
     }
 
-    public void setServiziCollection(Collection<Servizi> serviziCollection) {
+    public void setServiziCollection(Collection<Servizio> serviziCollection) {
         this.serviziCollection = serviziCollection;
     }
 
-    public Utenti getNomeUtente() {
+    public Utente getNomeUtente() {
         return nomeUtente;
     }
 
-    public void setNomeUtente(Utenti nomeUtente) {
+    public void setNomeUtente(Utente nomeUtente) {
         this.nomeUtente = nomeUtente;
     }
 
-    public Categorie getCodiceCategoria() {
+    public Categoria getCodiceCategoria() {
         return codiceCategoria;
     }
 
-    public void setCodiceCategoria(Categorie codiceCategoria) {
+    public void setCodiceCategoria(Categoria codiceCategoria) {
         this.codiceCategoria = codiceCategoria;
     }
 
-    public Visite getCodiceVisita() {
+    public Visita getCodiceVisita() {
         return codiceVisita;
     }
 
-    public void setCodiceVisita(Visite codiceVisita) {
+    public void setCodiceVisita(Visita codiceVisita) {
         this.codiceVisita = codiceVisita;
     }
 
@@ -148,10 +148,10 @@ public class Biglietti implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Biglietti)) {
+        if (!(object instanceof Biglietto)) {
             return false;
         }
-        Biglietti other = (Biglietti) object;
+        Biglietto other = (Biglietto) object;
         if ((this.codiceBiglietto == null && other.codiceBiglietto != null) || (this.codiceBiglietto != null && !this.codiceBiglietto.equals(other.codiceBiglietto))) {
             return false;
         }

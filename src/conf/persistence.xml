@@ -2,11 +2,11 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="UdaMuseoPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>museo.db.Utenti</class>
-    <class>museo.db.Visite</class>
-    <class>museo.db.Biglietti</class>
-    <class>museo.db.Servizi</class>
-    <class>museo.db.Categorie</class>
+    <class>museo.db.Biglietto</class>
+    <class>museo.db.Categoria</class>
+    <class>museo.db.Servizio</class>
+    <class>museo.db.Utente</class>
+    <class>museo.db.Visita</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://10.0.1.252:3306/5ib33?zeroDateTimeBehavior=convertToNull"/>

@@ -41,7 +41,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Visite.findByTipo", query = "SELECT v FROM Visite v WHERE v.tipo = :tipo"),
     @NamedQuery(name = "Visite.findByDataInizio", query = "SELECT v FROM Visite v WHERE v.dataInizio = :dataInizio"),
     @NamedQuery(name = "Visite.findByDataFine", query = "SELECT v FROM Visite v WHERE v.dataFine = :dataFine")})
-public class Visite implements Serializable {
+public class Visita implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -69,16 +69,16 @@ public class Visite implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dataFine;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "codiceVisita")
-    private Collection<Biglietti> bigliettiCollection;
+    private Collection<Biglietto> bigliettiCollection;
 
-    public Visite() {
+    public Visita() {
     }
 
-    public Visite(Integer codiceVisita) {
+    public Visita(Integer codiceVisita) {
         this.codiceVisita = codiceVisita;
     }
 
-    public Visite(Integer codiceVisita, String titolo, long tariffa, String descrizione, Character tipo) {
+    public Visita(Integer codiceVisita, String titolo, long tariffa, String descrizione, Character tipo) {
         this.codiceVisita = codiceVisita;
         this.titolo = titolo;
         this.tariffa = tariffa;
@@ -151,11 +151,11 @@ public class Visite implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Biglietti> getBigliettiCollection() {
+    public Collection<Biglietto> getBigliettiCollection() {
         return bigliettiCollection;
     }
 
-    public void setBigliettiCollection(Collection<Biglietti> bigliettiCollection) {
+    public void setBigliettiCollection(Collection<Biglietto> bigliettiCollection) {
         this.bigliettiCollection = bigliettiCollection;
     }
 
@@ -169,10 +169,10 @@ public class Visite implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Visite)) {
+        if (!(object instanceof Visita)) {
             return false;
         }
-        Visite other = (Visite) object;
+        Visita other = (Visita) object;
         if ((this.codiceVisita == null && other.codiceVisita != null) || (this.codiceVisita != null && !this.codiceVisita.equals(other.codiceVisita))) {
             return false;
         }

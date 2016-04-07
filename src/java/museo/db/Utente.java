@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Utenti.findAll", query = "SELECT u FROM Utenti u"),
     @NamedQuery(name = "Utenti.findByNomeUtente", query = "SELECT u FROM Utenti u WHERE u.nomeUtente = :nomeUtente"),
     @NamedQuery(name = "Utenti.findByPassword", query = "SELECT u FROM Utenti u WHERE u.password = :password")})
-public class Utenti implements Serializable {
+public class Utente implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -40,16 +40,16 @@ public class Utenti implements Serializable {
     @Column(name = "Password")
     private String password;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nomeUtente")
-    private Collection<Biglietti> bigliettiCollection;
+    private Collection<Biglietto> bigliettiCollection;
 
-    public Utenti() {
+    public Utente() {
     }
 
-    public Utenti(String nomeUtente) {
+    public Utente(String nomeUtente) {
         this.nomeUtente = nomeUtente;
     }
 
-    public Utenti(String nomeUtente, String password) {
+    public Utente(String nomeUtente, String password) {
         this.nomeUtente = nomeUtente;
         this.password = password;
     }
@@ -71,11 +71,11 @@ public class Utenti implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Biglietti> getBigliettiCollection() {
+    public Collection<Biglietto> getBigliettiCollection() {
         return bigliettiCollection;
     }
 
-    public void setBigliettiCollection(Collection<Biglietti> bigliettiCollection) {
+    public void setBigliettiCollection(Collection<Biglietto> bigliettiCollection) {
         this.bigliettiCollection = bigliettiCollection;
     }
 
@@ -89,10 +89,10 @@ public class Utenti implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Utenti)) {
+        if (!(object instanceof Utente)) {
             return false;
         }
-        Utenti other = (Utenti) object;
+        Utente other = (Utente) object;
         if ((this.nomeUtente == null && other.nomeUtente != null) || (this.nomeUtente != null && !this.nomeUtente.equals(other.nomeUtente))) {
             return false;
         }

@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Categorie.findByTipoDocumento", query = "SELECT c FROM Categorie c WHERE c.tipoDocumento = :tipoDocumento"),
     @NamedQuery(name = "Categorie.findBySconto", query = "SELECT c FROM Categorie c WHERE c.sconto = :sconto"),
     @NamedQuery(name = "Categorie.findByDescrizione", query = "SELECT c FROM Categorie c WHERE c.descrizione = :descrizione")})
-public class Categorie implements Serializable {
+public class Categoria implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,16 +54,16 @@ public class Categorie implements Serializable {
     @Column(name = "Descrizione")
     private String descrizione;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "codiceCategoria")
-    private Collection<Biglietti> bigliettiCollection;
+    private Collection<Biglietto> bigliettiCollection;
 
-    public Categorie() {
+    public Categoria() {
     }
 
-    public Categorie(Integer codiceCategoria) {
+    public Categoria(Integer codiceCategoria) {
         this.codiceCategoria = codiceCategoria;
     }
 
-    public Categorie(Integer codiceCategoria, String titolo, int sconto, String descrizione) {
+    public Categoria(Integer codiceCategoria, String titolo, int sconto, String descrizione) {
         this.codiceCategoria = codiceCategoria;
         this.titolo = titolo;
         this.sconto = sconto;
@@ -111,11 +111,11 @@ public class Categorie implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Biglietti> getBigliettiCollection() {
+    public Collection<Biglietto> getBigliettiCollection() {
         return bigliettiCollection;
     }
 
-    public void setBigliettiCollection(Collection<Biglietti> bigliettiCollection) {
+    public void setBigliettiCollection(Collection<Biglietto> bigliettiCollection) {
         this.bigliettiCollection = bigliettiCollection;
     }
 
@@ -129,10 +129,10 @@ public class Categorie implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Categorie)) {
+        if (!(object instanceof Categoria)) {
             return false;
         }
-        Categorie other = (Categorie) object;
+        Categoria other = (Categoria) object;
         if ((this.codiceCategoria == null && other.codiceCategoria != null) || (this.codiceCategoria != null && !this.codiceCategoria.equals(other.codiceCategoria))) {
             return false;
         }
