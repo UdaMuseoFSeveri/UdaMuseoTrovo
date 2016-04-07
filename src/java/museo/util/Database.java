@@ -5,14 +5,9 @@
  */
 package museo.util;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import museo.db.Utente;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import java.util.*;
+import museo.db.*;
+import org.hibernate.*;
 
 /**
  *
@@ -26,17 +21,66 @@ public class Database {
         factory = HibernateUtil.getSessionFactory();
     }
 
-    public int verificaUtente(Utente daControllare) {
+    /**
+     *
+     * @param utente
+     * @return 0 se nome utente e password sono corretti, 1 se nome utente non
+     * esiste, -1 se la password è errata
+     */
+    public int verificaUtente(Utente utente) {
         Transaction tx = null;
         Session session = factory.openSession();
-        ArrayList<Utente> ute = new ArrayList<>();
+        String username = utente.getNomeUtente();
         try {
             tx = session.beginTransaction();
-            List utenti = session.createCriteria(Utente.class).list();
-            for (Iterator iterator = utenti.iterator(); iterator.hasNext();) {
-               Utente utente= iterator;
+            Query q = session.createSQLQuery("SELECT password FROM Utente where nomeUtente= ? ").addEntity(Utente.class);
+            q.setString(0, username);
+            if (q.list().size() == 0) {
+                return 1;
             }
-
+            if (q.list().size() > 0) {
+                String passUser = (String) q.list().get(0);
+                if (passUser.equals(utente.getPassword())) {
+                    return 0;
+                } else {
+                    return -1;
+                }
+            }
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+            return 1;
+        } finally {
+            session.close();
         }
-
+        return -2;
     }
+      
+    
+    public void salvaUtente(Utente u) {
+        Session session = factory.openSession();
+        try {
+            session.beginTransaction();
+            session.saveOrUpdate(u);
+            session.getTransaction().commit();
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+            session.getTransaction().rollback();
+        }
+    }
+
+    public void salvaBiglietto(Biglietto b) {
+        Session session = factory.openSession();
+        try {
+            session.beginTransaction();
+            session.saveOrUpdate(b);
+            session.getTransaction().commit();
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+            session.getTransaction().rollback();
+        }
+    }
+
+}
