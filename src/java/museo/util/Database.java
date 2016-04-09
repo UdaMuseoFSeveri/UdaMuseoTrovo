@@ -102,4 +102,103 @@ public class Database {
         }
         return null;
     }
+    
+    public List<Visita> getVisiteFromDate(Date dataInizio, Date dataFine) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Query query = session.createSQLQuery("SELECT * FROM Visite WHERE Tipo='E'  AND  DataInizio>=?  AND  DataFine<=?");
+            query.setDate(0, dataInizio);
+            query.setDate(0, dataFine);
+            List risultati = query.list();
+            return risultati;
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
+
+    public List<Visita> getVisite() {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Query query = session.createSQLQuery("SELECT * FROM Visite WHERE Tipo='V'");
+            List risultati = query.list();
+            return risultati;
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
+    
+    public Visita getEventoById(int id) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Query q = session.createSQLQuery("SELECT * FROM Visite WHERE CodiceVisita=? ");
+            q.setInteger(0, id);
+            if (q.list().size() > 0) {
+                return (Visita) q.list().get(0);
+            }
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
+    
+    public List<Categoria> getCategorie() {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Query query = session.createSQLQuery("SELECT * FROM Categorie");
+            List risultati = query.list();
+            return risultati;
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
+
+    public List<Servizio> getServizi() {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Query query = session.createSQLQuery("SELECT * FROM Servizi");
+            List risultati = query.list();
+            return risultati;
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
 }
