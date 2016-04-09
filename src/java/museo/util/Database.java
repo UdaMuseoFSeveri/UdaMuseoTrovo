@@ -57,8 +57,7 @@ public class Database {
         }
         return -2;
     }
-      
-    
+
     public void salvaUtente(Utente u) {
         Session session = factory.openSession();
         try {
@@ -83,4 +82,24 @@ public class Database {
         }
     }
 
+    public List<Biglietto> getBiglietti(Date timestamp, String username) {
+        Transaction tx = null;
+        Session session = factory.openSession();
+        ArrayList<Biglietto> biglietti = new ArrayList<>();
+        try {
+            tx = session.beginTransaction();
+            Query q = session.createSQLQuery("SELECT * FROM Biglietti where nomeUtente= ? AND DataPrenotazione=? ").addEntity(Biglietto.class);
+            q.setParameter(0, username);
+            q.setParameter(1, timestamp);
+            return q.list();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
 }
