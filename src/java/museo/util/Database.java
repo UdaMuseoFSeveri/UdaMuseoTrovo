@@ -35,7 +35,7 @@ public class Database {
             tx = session.beginTransaction();
             Query q = session.createSQLQuery("SELECT Password FROM Utente where NomeUtente= ? ").addEntity(Utente.class);
             q.setString(0, username);
-            if (q.list().size() == 0) {
+            if (q.list().isEmpty()) {
                 return 1;
             }
             if (q.list().size() > 0) {
