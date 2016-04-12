@@ -33,7 +33,7 @@ public class Database {
         String username = utente.getNomeUtente();
         try {
             tx = session.beginTransaction();
-            Query q = session.createSQLQuery("SELECT password FROM Utente where nomeUtente= ? ").addEntity(Utente.class);
+            Query q = session.createSQLQuery("SELECT Password FROM Utente where NomeUtente= ? ").addEntity(Utente.class);
             q.setString(0, username);
             if (q.list().size() == 0) {
                 return 1;
@@ -88,7 +88,7 @@ public class Database {
         ArrayList<Biglietto> biglietti = new ArrayList<>();
         try {
             tx = session.beginTransaction();
-            Query q = session.createSQLQuery("SELECT * FROM Biglietti where nomeUtente= ? AND DataPrenotazione=? ").addEntity(Biglietto.class);
+            Query q = session.createSQLQuery("SELECT * FROM Biglietti where NomeUtente= ? AND DataPrenotazione=? ").addEntity(Biglietto.class);
             q.setParameter(0, username);
             q.setParameter(1, timestamp);
             return q.list();
