@@ -9,7 +9,7 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 
 @Configuration
-@ComponentScan(value="museo.controller")
+@ComponentScan(value="museo.controllers")
 @EnableWebMvc
 public class Config extends WebMvcConfigurerAdapter{
     
