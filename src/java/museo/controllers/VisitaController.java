@@ -9,20 +9,23 @@ import museo.util.Database;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
- * @author FSEVERI\magro3026
+ * @author FSEVERI\trovo2987
  */
-
 @Controller
-public class CategorieController {
-    private Database db = new Database();
+public class VisitaController {
+    Database db;
     
-    @RequestMapping(value="/categorie",method=RequestMethod.GET)
-    public String getCategorie(ModelMap map){
-        map.put("categorie", db.getCategorie());
-        return "categorie";
+    public VisitaController(){
+        db = new Database();
+    }
+    
+    @RequestMapping(value="/visita")
+    public String visitaMuseo(ModelMap map,@RequestParam(value="codice", required=true)int id){
+        map.put("visita",db.getEventoById(id));
+        return "visita";
     }
 }
