@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class VisitaController {
-    Database db;
+    private Database db;
     
     public VisitaController(){
         db = new Database();

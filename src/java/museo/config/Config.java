@@ -1,19 +1,20 @@
 package museo.config;
 
-import org.springframework.context.annotation.*;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.context.annotation.Bean;  
+import org.springframework.context.annotation.ComponentScan;  
+import org.springframework.context.annotation.Configuration;  
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;  
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.JstlView;
-import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;  
+import org.springframework.web.servlet.view.UrlBasedViewResolver; 
 
 
 @Configuration
-@ComponentScan(value="museo.controllers")
-@EnableWebMvc
-public class Config extends WebMvcConfigurerAdapter{
-    
- 
+@ComponentScan("museo.controllers")
+@EnableWebMvc   
+public class Config extends WebMvcConfigurerAdapter {  
+      
     @Bean  
     public UrlBasedViewResolver setupViewResolver() {  
         UrlBasedViewResolver resolver = new UrlBasedViewResolver();  
@@ -22,8 +23,9 @@ public class Config extends WebMvcConfigurerAdapter{
         resolver.setViewClass(JstlView.class);  
         return resolver;  
     }  
-     @Override
+    
+    @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/WEB-INF/resources/*");
-    } 
-}
+    }
+}  
