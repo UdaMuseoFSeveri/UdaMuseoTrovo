@@ -5,6 +5,9 @@
  */
 package museo.controllers;
 
+import java.util.ArrayList;
+import java.util.Date;
+import museo.db.Visita;
 import museo.util.Database;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -12,20 +15,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
- * @author FSEVERI\trovo2987
+ * @author FSEVERI\reginato2906
  */
 @Controller
 public class VisiteController {
-    Database db;
+    private Database db;
+    private ArrayList <Visita> esposizioni;
+    private ArrayList <Visita> visite_base;
+    private Date dInizio=new Date(2016,01,01);
+    private Date dFine=new Date(2016,12,31);
     
     public VisiteController(){
         db = new Database();
-        //db.getVisite();
+        visite_base=(ArrayList<Visita>) db.getVisite();
+        esposizioni=(ArrayList<Visita>) db.getVisiteFromDate(dInizio, dFine);
     }
     
-    @RequestMapping(value={"","/homepage","/"})
+    @RequestMapping(value={"","/homepage","/",})
     public String visiteMuseo(ModelMap map){
-        
+        Date dInizio=new Date(2016,01,01);
+        Date dFine=new Date(2016,12,31);
+        map.put("visite",esposizioni); 
+        map.put("visiteBase",visite_base);
         return "index";
     }
 }
