@@ -1,12 +1,7 @@
-<?php 
-session_start();
-if(isset($_SESSION["user"])) header("Location: ../menu.php");
-?>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<jsp:useBean id="user" class="Util.User" scope="session" />
+<jsp:useBean id="user" class="museo.db.Utente" scope="session" />
 
 
 <html>

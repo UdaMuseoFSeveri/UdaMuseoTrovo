@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
    <!-- Navigation -->
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <head>
             <jsp:include page="head.jsp"/>
             <title>Servizi</title>
