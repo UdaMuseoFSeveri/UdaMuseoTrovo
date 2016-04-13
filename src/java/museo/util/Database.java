@@ -204,7 +204,7 @@ public class Database {
 
     public int utenteEsistente(String utente) {
         Transaction tx = null;
-        Session session = factory.openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             tx = session.beginTransaction();
             Query q = session.createSQLQuery("SELECT NomeUtente FROM Utente where NomeUtente= ? ").addEntity(Utente.class);
