@@ -102,7 +102,7 @@ public class Database {
         }
         return null;
     }
-    
+
     public List<Visita> getVisiteFromDate(Date dataInizio, Date dataFine) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
@@ -142,7 +142,7 @@ public class Database {
         }
         return null;
     }
-    
+
     public Visita getEventoById(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
@@ -163,7 +163,7 @@ public class Database {
         }
         return null;
     }
-    
+
     public List<Categoria> getCategorie() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
@@ -201,4 +201,26 @@ public class Database {
         }
         return null;
     }
+
+    public int utenteEsistente(String utente) {
+        Transaction tx = null;
+        Session session = factory.openSession();
+        try {
+            tx = session.beginTransaction();
+            Query q = session.createSQLQuery("SELECT NomeUtente FROM Utente where NomeUtente= ? ").addEntity(Utente.class);
+            q.setString(0, utente);
+            if (q.list().isEmpty()) {
+                return 0;
+            }
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return 1;
+    }
+
 }
