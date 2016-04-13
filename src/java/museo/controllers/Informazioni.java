@@ -17,12 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 
 @Controller
-public class CategorieController {
+public class Informazioni {
     private Database db = new Database();
-    
-    @RequestMapping(value="/categorie",method=RequestMethod.GET)
-    public String getCategorie(ModelMap map){
-        map.put("categorie", db.getCategorie());
-        return "categorie";
+  
+    @RequestMapping(value="/info",method=RequestMethod.GET)
+    public String getInfo(ModelMap map){
+        return "info";
     }
 }
