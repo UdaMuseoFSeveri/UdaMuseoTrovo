@@ -15,11 +15,11 @@ import org.hibernate.*;
  */
 public class Database {
 
-    private SessionFactory factory;
+    /*private SessionFactory factory;
 
     public Database() {
         factory = HibernateUtil.getSessionFactory();
-    }
+    }*/
 
     /**
      *
@@ -29,7 +29,7 @@ public class Database {
      */
     public int verificaUtente(Utente utente) {
         Transaction tx = null;
-        Session session = factory.openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         String username = utente.getNomeUtente();
         try {
             tx = session.beginTransaction();
@@ -59,7 +59,7 @@ public class Database {
     }
 
     public void salvaUtente(Utente u) {
-        Session session = factory.openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
             session.saveOrUpdate(u);
@@ -71,7 +71,7 @@ public class Database {
     }
 
     public void salvaBiglietto(Biglietto b) {
-        Session session = factory.openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
             session.saveOrUpdate(b);
@@ -84,7 +84,7 @@ public class Database {
 
     public List<Biglietto> getBiglietti(Date timestamp, String username) {
         Transaction tx = null;
-        Session session = factory.openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         ArrayList<Biglietto> biglietti = new ArrayList<>();
         try {
             tx = session.beginTransaction();
@@ -104,7 +104,7 @@ public class Database {
     }
     
     public List<Visita> getVisiteFromDate(Date dataInizio, Date dataFine) {
-        Session session = factory.openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
@@ -125,7 +125,7 @@ public class Database {
     }
 
     public List<Visita> getVisite() {
-        Session session = factory.openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
@@ -144,7 +144,7 @@ public class Database {
     }
     
     public Visita getEventoById(int id) {
-        Session session = factory.openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
@@ -165,7 +165,7 @@ public class Database {
     }
     
     public List<Categoria> getCategorie() {
-        Session session = factory.openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
@@ -184,7 +184,7 @@ public class Database {
     }
 
     public List<Servizio> getServizi() {
-        Session session = factory.openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
