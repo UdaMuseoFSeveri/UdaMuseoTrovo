@@ -167,7 +167,7 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
+    <jsp:include page="footer.jsp"/>
 </body>
 
 </html>
