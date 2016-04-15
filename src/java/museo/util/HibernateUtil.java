@@ -21,29 +21,18 @@ public class HibernateUtil {
 
     private static SessionFactory sessionFactory;
     
-    /*static {
-        try {
-            // Create the SessionFactory from standard (hibernate.cfg.xml) 
-            // config file.
-            sessionFactory = new AnnotationConfiguration().configure().addPackage("museo.db").addAnnotatedClass(Biglietto.class).addAnnotatedClass(Categoria.class).addAnnotatedClass(Servizio.class).addAnnotatedClass(Utente.class).addAnnotatedClass(Visita.class).buildSessionFactory();
-        } catch (Throwable ex) {
-            // Log the exception. 
-            System.err.println("Initial SessionFactory creation failed." + ex);
-            throw new ExceptionInInitializerError(ex);
-        }
-    }*/
-    public static SessionFactory getSessionFactory() {
-        if (sessionFactory == null) {
-            // loads configuration and mappings
-            Configuration configuration = new Configuration().configure();
+    static {
+        Configuration configuration = new Configuration();         
+//configuration.addPackage("museo.db").addAnnotatedClass(Biglietto.class).addAnnotatedClass(Categoria.class).addAnnotatedClass(Servizio.class).addAnnotatedClass(Utente.class).addAnnotatedClass(Visita.class);
+            configuration.configure();
             ServiceRegistry serviceRegistry
                 = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();
 
             // builds a session factory from the service registry
-            sessionFactory = configuration.buildSessionFactory(serviceRegistry);           
-        }
-
-        return sessionFactory;
+            sessionFactory = configuration.buildSessionFactory(serviceRegistry);   
+    }
+    public static SessionFactory getSessionFactory() {
+      return sessionFactory;
     }
 }

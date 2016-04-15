@@ -15,11 +15,11 @@ import org.hibernate.*;
  */
 public class Database {
 
-    /*private SessionFactory factory;
+    private SessionFactory factory;
 
     public Database() {
         factory = HibernateUtil.getSessionFactory();
-    }*/
+    }
 
     /**
      *
@@ -29,7 +29,7 @@ public class Database {
      */
     public int verificaUtente(Utente utente) {
         Transaction tx = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = factory.openSession();
         String username = utente.getNomeUtente();
         try {
             tx = session.beginTransaction();
@@ -59,7 +59,7 @@ public class Database {
     }
 
     public void salvaUtente(Utente u) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = factory.openSession();
         try {
             session.beginTransaction();
             session.saveOrUpdate(u);
@@ -71,7 +71,7 @@ public class Database {
     }
 
     public void salvaBiglietto(Biglietto b) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = factory.openSession();
         try {
             session.beginTransaction();
             session.saveOrUpdate(b);
@@ -84,7 +84,7 @@ public class Database {
 
     public List<Biglietto> getBiglietti(Date timestamp, String username) {
         Transaction tx = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = factory.openSession();
         ArrayList<Biglietto> biglietti = new ArrayList<>();
         try {
             tx = session.beginTransaction();
@@ -104,11 +104,11 @@ public class Database {
     }
 
     public List<Visita> getVisiteFromDate(Date dataInizio, Date dataFine) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Query query = session.createSQLQuery("SELECT * FROM Visite WHERE Tipo='E'  AND  DataInizio>=?  AND  DataFine<=?");
+            Query query = session.createSQLQuery("SELECT * FROM Visite WHERE Tipo='E'  AND  DataInizio>=?  AND  DataFine<=?").addEntity(Visita.class);
             query.setDate(0, dataInizio);
             query.setDate(0, dataFine);
             List risultati = query.list();
@@ -125,11 +125,11 @@ public class Database {
     }
 
     public List<Visita> getVisite() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Query query = session.createSQLQuery("SELECT * FROM Visite WHERE Tipo='V'");
+            Query query = session.createSQLQuery("SELECT * FROM Visite WHERE Tipo='V'").addEntity(Visita.class);
             List risultati = query.list();
             return risultati;
         } catch (HibernateException e) {
@@ -144,14 +144,14 @@ public class Database {
     }
 
     public Visita getEventoById(int id) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Query q = session.createSQLQuery("SELECT * FROM Visite WHERE CodiceVisita=? ");
+            Query q = session.createSQLQuery("SELECT * FROM Visite WHERE CodiceVisita=? ").addEntity(Visita.class);
             q.setInteger(0, id);
             if (q.list().size() > 0) {
-                return (Visita) q.list().get(0);
+              return (Visita) q.list().get(0);
             }
         } catch (HibernateException e) {
             if (tx != null) {
@@ -165,11 +165,11 @@ public class Database {
     }
 
     public List<Categoria> getCategorie() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Query query = session.createSQLQuery("SELECT * FROM Categorie");
+            Query query = session.createSQLQuery("SELECT * FROM Categorie").addEntity(Categoria.class);
             List risultati = query.list();
             return risultati;
         } catch (HibernateException e) {
@@ -184,11 +184,11 @@ public class Database {
     }
 
     public List<Servizio> getServizi() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Query query = session.createSQLQuery("SELECT * FROM Servizi");
+            Query query = session.createSQLQuery("SELECT * FROM Servizi").addEntity(Servizio.class);
             List risultati = query.list();
             return risultati;
         } catch (HibernateException e) {
@@ -204,7 +204,7 @@ public class Database {
 
     public int utenteEsistente(String utente) {
         Transaction tx = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = factory.openSession();
         try {
             tx = session.beginTransaction();
             Query q = session.createSQLQuery("SELECT NomeUtente FROM Utente where NomeUtente= ? ").addEntity(Utente.class);
