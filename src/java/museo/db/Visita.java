@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "Visite")
-@XmlRootElement
+/*@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Visite.findAll", query = "SELECT v FROM Visite v"),
     @NamedQuery(name = "Visite.findByCodiceVisita", query = "SELECT v FROM Visite v WHERE v.codiceVisita = :codiceVisita"),
@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Visite.findByImmagineCopertina", query = "SELECT v FROM Visite v WHERE v.immagineCopertina = :immagineCopertina"),
     @NamedQuery(name = "Visite.findByTipo", query = "SELECT v FROM Visite v WHERE v.tipo = :tipo"),
     @NamedQuery(name = "Visite.findByDataInizio", query = "SELECT v FROM Visite v WHERE v.dataInizio = :dataInizio"),
-    @NamedQuery(name = "Visite.findByDataFine", query = "SELECT v FROM Visite v WHERE v.dataFine = :dataFine")})
+    @NamedQuery(name = "Visite.findByDataFine", query = "SELECT v FROM Visite v WHERE v.dataFine = :dataFine")})*/
 public class Visita implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

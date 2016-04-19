@@ -32,12 +32,12 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "Biglietti")
-@XmlRootElement
+/*@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Biglietti.findAll", query = "SELECT b FROM Biglietti b"),
     @NamedQuery(name = "Biglietti.findByCodiceBiglietto", query = "SELECT b FROM Biglietti b WHERE b.codiceBiglietto = :codiceBiglietto"),
     @NamedQuery(name = "Biglietti.findByDataValidita", query = "SELECT b FROM Biglietti b WHERE b.dataValidita = :dataValidita"),
-    @NamedQuery(name = "Biglietti.findByDataPrenotazione", query = "SELECT b FROM Biglietti b WHERE b.dataPrenotazione = :dataPrenotazione")})
+    @NamedQuery(name = "Biglietti.findByDataPrenotazione", query = "SELECT b FROM Biglietti b WHERE b.dataPrenotazione = :dataPrenotazione")})*/
 public class Biglietto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

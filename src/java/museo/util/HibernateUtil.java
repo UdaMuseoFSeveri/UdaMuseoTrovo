@@ -21,18 +21,22 @@ public class HibernateUtil {
 
     private static SessionFactory sessionFactory;
     
-    static {
+    /*static {
+        
+    }*/
+    
+    public static SessionFactory getSessionFactory() {
+        if(sessionFactory==null){
         Configuration configuration = new Configuration();         
-//configuration.addPackage("museo.db").addAnnotatedClass(Biglietto.class).addAnnotatedClass(Categoria.class).addAnnotatedClass(Servizio.class).addAnnotatedClass(Utente.class).addAnnotatedClass(Visita.class);
+        configuration.addAnnotatedClass(Biglietto.class).addAnnotatedClass(Categoria.class).addAnnotatedClass(Servizio.class).addAnnotatedClass(Utente.class).addAnnotatedClass(Visita.class);
             configuration.configure();
             ServiceRegistry serviceRegistry
                 = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();
 
             // builds a session factory from the service registry
-            sessionFactory = configuration.buildSessionFactory(serviceRegistry);   
-    }
-    public static SessionFactory getSessionFactory() {
+            sessionFactory = configuration.buildSessionFactory(serviceRegistry); 
+        }
       return sessionFactory;
     }
 }
