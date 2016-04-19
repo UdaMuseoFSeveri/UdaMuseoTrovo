@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -39,7 +40,7 @@ public class Utente implements Serializable {
     @Basic(optional = false)
     @Column(name = "Password")
     private String password;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nomeUtente")
+    @OneToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "nomeUtente")
     private Collection<Biglietto> bigliettiCollection;
 
     public Utente() {
