@@ -14,14 +14,7 @@
             <!-- Page Heading/Breadcrumbs -->
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Portfolio Item
-                        <small>Subheading</small>
-                    </h1>
-                    <ol class="breadcrumb">
-                        <li><a href="index.jsp">Home</a>
-                        </li>
-                        <li class="active">Portfolio Item</li>
-                    </ol>
+                    <h1 class="page-header">${visita.titolo}</h1>
                 </div>
             </div>
             <!-- /.row -->
@@ -30,54 +23,30 @@
             <div class="row">
 
                 <div class="col-md-8">
-                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                        <!-- Indicators -->
-                        <ol class="carousel-indicators">
-                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                        </ol>
-
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner">
-                            <div class="item active">
-                                <img class="img-responsive" src="http://placehold.it/750x500" alt="">
-                            </div>
-                            <div class="item">
-                                <img class="img-responsive" src="http://placehold.it/750x500" alt="">
-                            </div>
-                            <div class="item">
-                                <img class="img-responsive" src="http://placehold.it/750x500" alt="">
-                            </div>
-                        </div>
-
-                        <!-- Controls -->
-                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                            <span class="glyphicon glyphicon-chevron-left"></span>
-                        </a>
-                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                            <span class="glyphicon glyphicon-chevron-right"></span>
-                        </a>
-                    </div>
+                    <a href="#">
+                        <img class="img-responsive img-hover img-related" src="${visita.getImmagineCopertina()}" alt="${visita.getTitolo()}">
+                    </a>
                 </div>
 
                 <div class="col-md-4">
-                    <h3>Project Description</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
-                    <h3>Project Details</h3>
+                    <h3>Descrizione</h3>
+                    <p>${visita.getDescrizione()}</p>
+                    <h3>Date</h3>
                     <ul>
                         <li>Lorem Ipsum</li>
                         <li>Dolor Sit Amet</li>
                         <li>Consectetur</li>
                         <li>Adipiscing Elit</li>
                     </ul>
+                    <h3>Prezzo</h3>
+                    <p>${visita.tariffa} &euro;</p>
                 </div>
 
             </div>
             <!-- /.row -->
 
             <!-- Related Projects Row -->
-            <div class="row">
+            <!--<div class="row">
 
                 <div class="col-lg-12">
                     <h3 class="page-header">Related Projects</h3>
@@ -107,21 +76,11 @@
                     </a>
                 </div>
 
-            </div>
+            </div>-->
             <!-- /.row -->
 
             <hr>
 
-            <!-- Footer -->
-            <footer>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <p>Copyright &copy; Your Website 2014</p>
-                    </div>
-                </div>
-            </footer>
-
-        </div>
         <!-- /.container -->
 
         <jsp:include page="footer.jsp"/>
