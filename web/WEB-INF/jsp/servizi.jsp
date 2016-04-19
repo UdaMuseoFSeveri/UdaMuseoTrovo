@@ -20,7 +20,7 @@
                     <small>Subheading</small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="index.html">Home</a>
+                    <li><a href="./">Home</a>
                     </li>
                     <li class="active">Services</li>
                 </ol>
@@ -284,12 +284,8 @@
 
     </div>
     <!-- /.container -->
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    
+     <jsp:include page="footer.jsp"/>
 
 </body>
 

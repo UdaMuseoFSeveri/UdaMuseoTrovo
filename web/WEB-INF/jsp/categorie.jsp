@@ -15,7 +15,8 @@
     <body>
         <h1>Hello World!</h1>
     <c:forEach items="${categorie}" var="categoria">
-        ${categoria.titolo} 
+        <p>${categoria.getTitolo()} </p>
     </c:forEach>
+    <jsp:include page="footer.jsp"/>
     </body>
 </html>
