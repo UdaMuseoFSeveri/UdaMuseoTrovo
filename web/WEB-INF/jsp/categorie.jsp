@@ -24,7 +24,7 @@
                                 <li class="active"><a href="#cat-${categoria.getCodiceCategoria()}" data-toggle="tab"><i class="fa fa-tree"></i>${categoria.getTitolo()}</a>
                                 </li>
                             </c:if>
-                            <li><a href="#cat-${categoria.getCodiceCategoria()}" data-toggle="tab"><i class="fa fa-tree"></i>${categoria.getTitolo()}</a>
+                            <li><a href="#cat-${categoria.getCodiceCategoria()}" data-toggle="tab"> ${categoria.getTitolo()}</a>
                             </li>
                         </c:forEach>
                     </ul>
