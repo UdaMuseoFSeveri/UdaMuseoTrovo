@@ -22,22 +22,25 @@
             <!-- Portfolio Item Row -->
             <div class="row">
 
-                <div class="col-md-8">
+                <div class="col-md-8" >
                     <a href="#">
-                        <img class="img-responsive img-hover img-related" src="${visita.getImmagineCopertina()}" alt="${visita.getTitolo()}">
+                        <img style="height: 400px; width: 800px;" class="img-responsive img-hover img-related" src="${visita.getImmagineCopertina()}" alt="${visita.getTitolo()}">
                     </a>
                 </div>
 
                 <div class="col-md-4">
                     <h3>Descrizione</h3>
                     <p>${visita.getDescrizione()}</p>
+                    
+                    <c:if test="${visita.getTipo().equals("E")}">
                     <h3>Date</h3>
-                    <ul>
-                        <li>Lorem Ipsum</li>
-                        <li>Dolor Sit Amet</li>
-                        <li>Consectetur</li>
-                        <li>Adipiscing Elit</li>
-                    </ul>
+                        <ul>
+                            <li>Lorem Ipsum</li>
+                            <li>Dolor Sit Amet</li>
+                            <li>Consectetur</li>
+                            <li>Adipiscing Elit</li>
+                        </ul>
+                    </c:if>
                     <h3>Prezzo</h3>
                     <p>${visita.tariffa} &euro;</p>
                 </div>
