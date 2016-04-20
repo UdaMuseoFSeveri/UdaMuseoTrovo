@@ -19,12 +19,15 @@
                     <ul id="myTab" class="nav nav-tabs nav-justified">
 
                         <c:forEach items="${categorie}" var="categoria">  
-                            <c:if test="${cat.getCodiceCategoria() < 2}">
-                                <li class="active"><a href="#cat-${categoria.getCodiceCategoria()}" data-toggle="tab"><i class="fa fa-tree"></i>${categoria.getTitolo()}</a>
+                            <c:if test="${categoria.getCodiceCategoria() < 2}">
+                                <li class="active"><a href="#cat-${categoria.getCodiceCategoria()}" data-toggle="tab" aria-expanded="true"></i>${categoria.getTitolo()}</a>
                                 </li>
                             </c:if>
-                            <li><a href="#cat-${categoria.getCodiceCategoria()}" data-toggle="tab"> ${categoria.getTitolo()}</a>
-                            </li>
+                            <c:if test="${categoria.getCodiceCategoria() > 1}">
+                                <li><a href="#cat-${categoria.getCodiceCategoria()}" data-toggle="tab"> ${categoria.getTitolo()}</a>
+                                </li>
+                            </c:if>
+
                         </c:forEach>
                     </ul>
 
@@ -37,17 +40,17 @@
                                 </div>
                             </c:if>
                             <c:if test="${cat.getCodiceCategoria() >1}">
-                            <div class="tab-pane fade in" id="cat-${cat.getCodiceCategoria()}">
-                                <h4>${cat.getTitolo()}</h4>
-                                <ul>
-                                    ${cat.getDescrizione()}
-                                </ul>                                  
-                                <p>Per poter accedere a questa categoria e agli sconti che ne derivano il cliente dovrà mostrare questi tipi di documenti:</p>
-                                <ul>
-                                    ${cat.getTipoDocumento()}
-                                </ul>
-                                <p>Lo sconto per questa categoria sarà del ${cat.getSconto()} %</p>
-                            </div>
+                                <div class="tab-pane fade in" id="cat-${cat.getCodiceCategoria()}">
+                                    <h4>${cat.getTitolo()}</h4>
+                                    <ul>
+                                        ${cat.getDescrizione()}
+                                    </ul>                                  
+                                    <p>Per poter accedere a questa categoria e agli sconti che ne derivano il cliente dovrà mostrare questi tipi di documenti:</p>
+                                    <ul>
+                                        ${cat.getTipoDocumento()}
+                                    </ul>
+                                    <p>Lo sconto per questa categoria sarà del ${cat.getSconto()} %</p>
+                                </div>
                             </c:if>
                         </c:forEach>
 

@@ -24,14 +24,15 @@ public class VisiteController {
     
     public VisiteController(){
         db = new Database();
+        Date dInizio=new Date(2016,01,01);
+        Date dFine=new Date(2016,12,31);
         visite_base=(ArrayList<Visita>) db.getVisite();
         esposizioni=(ArrayList<Visita>) db.getVisiteFromDate(dInizio, dFine);
     }
     
     @RequestMapping(value="/visite")
     public String visiteMuseo(ModelMap map){
-        Date dInizio=new Date(2016,01,01);
-        Date dFine=new Date(2016,12,31);
+        System.out.println(dInizio.getYear()+"/"+dInizio.getMonth()+"/"+dInizio.getDay()+"CAZZOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"+ dFine.getYear()+"/"+dFine.getMonth()+"/"+dFine.getDay());
         map.put("visite",esposizioni); 
         map.put("visiteBase",visite_base);
         return "visite";
