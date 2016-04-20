@@ -7,6 +7,7 @@
     </head>
     <body>     
         <jsp:include page="menu.jsp"/>
+        <%@ page import="museo.db.Visita" %>
 
         <!-- Page Content -->
         <div class="container">
@@ -31,18 +32,21 @@
                 <div class="col-md-4">
                     <h3>Descrizione</h3>
                     <p>${visita.getDescrizione()}</p>
-                    
-                    <c:if test="${visita.getTipo().equals("E")}">
-                    <h3>Date</h3>
+                    <% 
+                    Visita v = (Visita) request.getAttribute("visita");
+                    if(v.getTipo() == 'E'){
+                    %>
+                        <h3>Date</h3>
                         <ul>
-                            <li>Lorem Ipsum</li>
-                            <li>Dolor Sit Amet</li>
-                            <li>Consectetur</li>
-                            <li>Adipiscing Elit</li>
+                            <li>Inizio evento: ${visita.getDataInizio()}</li>
+                            <li>Fine evento: ${visita.getDataFine()}</li>
                         </ul>
-                    </c:if>
+                    <%
+                    }
+                    %>
                     <h3>Prezzo</h3>
                     <p>${visita.tariffa} &euro;</p>
+                    <button class="btn btn-primary">Acquista Biglietti</button>
                 </div>
 
             </div>
