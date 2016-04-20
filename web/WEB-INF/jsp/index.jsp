@@ -20,39 +20,39 @@
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
-                <div class="item active">
-                    <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide One');"></div>
-                    <div class="carousel-caption">
-                        <h2>Caption 1</h2>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Two');"></div>
-                    <div class="carousel-caption">
-                        <h2>Caption 2</h2>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');"></div>
-                    <div class="carousel-caption">
-                        <h2>Caption 3</h2>
-                    </div>
-                </div>
-            </div>
+                <c:forEach items="${visite}" var="visita">
+                    <c:if test="${visita.getCodiceCategoria() < 2}">
+                        <div class="item active">
+                            <div class="fill" style="background-image:url('${visita.getImmagineCopertina()}');"></div>
+                            <div class="carousel-caption">
+                                <h2>${visita.getTitolo()}</h2>
+                            </div>
+                        </div>
+                    </c:if>
+                    <c:if test="${visita.getCodiceCategoria() > 1}">
+                        <div class="item">
+                            <div class="fill" style="background-image:url('${visita.getImmagineCopertina()}');"></div>
+                            <div class="carousel-caption">
+                                <h2>${visita.getTitolo()}/h2>
+                            </div>
 
-            <!-- Controls -->
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                <span class="icon-prev"></span>
-            </a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                <span class="icon-next"></span>
-            </a>
+                        </div>
+                    </c:if>
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                        <span class="icon-prev"></span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                        <span class="icon-next"></span>
+                    </a>
+                </c:forEach>
+            </div>
         </header>
 
         <!-- Page Content -->
         <div class="container">
 
-            <!-- Marketing Icons Section -->
+            <!-- Selezione delle visite base -->
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
@@ -67,8 +67,8 @@
                             </div>
                             <div class="panel-body">
                                 <p>${visita.getDescrizione()}</p>  
-                                <a href="./visita?codice=${visita.getCodiceVisita()}" class="btn btn-default" > Scopri</a>
                             </div>
+                            <a href="./visita?codice=${visita.getCodiceVisita()}" class="btn btn-default"> Scopri</a>  
                         </div>
                     </div>             
                 </c:forEach>
