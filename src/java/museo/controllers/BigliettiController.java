@@ -22,8 +22,11 @@ public class BigliettiController {
     private Database db = new Database();
     
     @RequestMapping(value="/bigliettiPrenotati",method=RequestMethod.GET)
-    public String getBigliettiPrenotati(ModelMap map, @RequestParam(value="timestamp", required=true)Date timestamp,@RequestParam(value="username", required=true)String username){
-        map.put("biglietti", db.getBiglietti(timestamp,username));
+    public String getBigliettiPrenotati(ModelMap map, @RequestParam(value="timetstamp", required=false)Date timetstamp,@RequestParam(value="tusername", required=false)String tusername){
+        Date timestamp= new Date(2016,04,13,9,33,00);
+        System.out.println(timestamp);
+        String username = "MarioRossi";
+        map.put("tikets", db.getBiglietti(timestamp,username));
         return "biglietti";
     }
 }
