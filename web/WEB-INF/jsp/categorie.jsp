@@ -34,16 +34,22 @@
                             <c:if test="${cat.getCodiceCategoria() < 2}">
                                 <div class="tab-pane fade active in" id="cat-${cat.getCodiceCategoria()}">
                                     <h4>${cat.getTitolo()}</h4>
-                                    <p> ${cat.getDescrizione()}</p>                                 
+                                    <ul> ${cat.getDescrizione()}</ul>                                 
                                 </div>
                             </c:if>
-                                <div class="tab-pane fade in" id="cat-${cat.getCodiceCategoria()}">
-                                    <h4>${cat.getTitolo()}</h4>
-                                    <p> ${cat.getDescrizione()}</p>
-                                    <p>Per poter accedere a questa categoria e agli sconti che ne derivano il cliente dovrà mostrare questi tipi di documenti:</p>
-                                    <p>${cat.getTipoDocumento()}</p>
-                                    <p>Lo sconto per questa categoria sarà del ${cat.getSconto()} %</p>
-                                </div>
+                            <c:if test="${cat.getCodiceCategoria() >1}">
+                            <div class="tab-pane fade in" id="cat-${cat.getCodiceCategoria()}">
+                                <h4>${cat.getTitolo()}</h4>
+                                <ul>
+                                    ${cat.getDescrizione()}
+                                </ul>                                  
+                                <p>Per poter accedere a questa categoria e agli sconti che ne derivano il cliente dovrà mostrare questi tipi di documenti:</p>
+                                <ul>
+                                    ${cat.getTipoDocumento()}
+                                </ul>
+                                <p>Lo sconto per questa categoria sarà del ${cat.getSconto()} %</p>
+                            </div>
+                            </c:if>
                         </c:forEach>
 
                     </div>
@@ -52,7 +58,7 @@
             </div>  
             <hr>
 
-        <jsp:include page="footer.jsp"/>
+            <jsp:include page="footer.jsp"/>
 
 
 
@@ -61,5 +67,5 @@
 
 
 
-    </body>
-</html>
+            </body>
+            </html>
