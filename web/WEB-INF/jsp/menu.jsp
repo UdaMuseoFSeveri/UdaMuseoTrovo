@@ -16,7 +16,7 @@
                     <li>
                         <a href="./categorie">Categorie</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="./servizi">Servizi</a>
                     </li>
                     <li class="dropdown">
@@ -29,6 +29,12 @@
                                 <a href="./visite/#ancora">Esposizioni tematiche</a>
                             </li>
                         </ul>
+                    </li>
+                    <li>
+                        <a href="./info">Info</a> 
+                    </li>
+                    <li>
+                        <a href="./login">Login</a> 
                     </li>
                 </ul>
             </div>

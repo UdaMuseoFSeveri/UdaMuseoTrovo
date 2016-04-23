@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class Informazioni {
-    private Database db = new Database();
   
     @RequestMapping(value="/info",method=RequestMethod.GET)
     public String getInfo(ModelMap map){
