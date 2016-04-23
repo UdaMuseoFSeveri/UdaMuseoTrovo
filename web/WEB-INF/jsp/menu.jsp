@@ -16,7 +16,7 @@
                     <li>
                         <a href="./categorie">Categorie</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="./servizi">Servizi</a>
                     </li>
                     <li class="dropdown">

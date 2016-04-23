@@ -7,5 +7,10 @@
     <property name="hibernate.connection.url">jdbc:mysql://10.0.1.252:3306/5ib33?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">5ib33</property>
     <property name="hibernate.connection.password">5ib33</property>
+    <mapping class="museo.db.Biglietto"/> 
+    <mapping class="museo.db.Categoria"/>  
+    <mapping class="museo.db.Servizio"/>  
+    <mapping class="museo.db.Utente"/> 
+    <mapping class="museo.db.Visita"/>    
   </session-factory>
 </hibernate-configuration>

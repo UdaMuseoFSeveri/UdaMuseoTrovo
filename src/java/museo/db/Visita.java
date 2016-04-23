@@ -31,18 +31,37 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "Visite")
+@NamedQueries(
+        {
+            @NamedQuery(
+                    name = "getVisiteFromDate",
+                    query = "FROM Visita V WHERE V.tipo='E'  AND  V.dataInizio>=:data_Ini  AND  V.dataFine<=:data_Fine"
+            ), 
+             
+            @NamedQuery(
+                    name = "getVisite",
+                    query = "FROM Visita V WHERE V.tipo='V'"
+            ),
+            @NamedQuery(
+                    name = "getEventoById",
+                    query = "FROM Visita V WHERE V.codiceVisita=:codice_Visita"
+            )
+        }
+                
+)
 /*@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Visite.findAll", query = "SELECT v FROM Visite v"),
-    @NamedQuery(name = "Visite.findByCodiceVisita", query = "SELECT v FROM Visite v WHERE v.codiceVisita = :codiceVisita"),
-    @NamedQuery(name = "Visite.findByTitolo", query = "SELECT v FROM Visite v WHERE v.titolo = :titolo"),
-    @NamedQuery(name = "Visite.findByTariffa", query = "SELECT v FROM Visite v WHERE v.tariffa = :tariffa"),
-    @NamedQuery(name = "Visite.findByDescrizione", query = "SELECT v FROM Visite v WHERE v.descrizione = :descrizione"),
-    @NamedQuery(name = "Visite.findByImmagineCopertina", query = "SELECT v FROM Visite v WHERE v.immagineCopertina = :immagineCopertina"),
-    @NamedQuery(name = "Visite.findByTipo", query = "SELECT v FROM Visite v WHERE v.tipo = :tipo"),
-    @NamedQuery(name = "Visite.findByDataInizio", query = "SELECT v FROM Visite v WHERE v.dataInizio = :dataInizio"),
-    @NamedQuery(name = "Visite.findByDataFine", query = "SELECT v FROM Visite v WHERE v.dataFine = :dataFine")})*/
+ @NamedQueries({
+ @NamedQuery(name = "Visite.findAll", query = "SELECT v FROM Visite v"),
+ @NamedQuery(name = "Visite.findByCodiceVisita", query = "SELECT v FROM Visite v WHERE v.codiceVisita = :codiceVisita"),
+ @NamedQuery(name = "Visite.findByTitolo", query = "SELECT v FROM Visite v WHERE v.titolo = :titolo"),
+ @NamedQuery(name = "Visite.findByTariffa", query = "SELECT v FROM Visite v WHERE v.tariffa = :tariffa"),
+ @NamedQuery(name = "Visite.findByDescrizione", query = "SELECT v FROM Visite v WHERE v.descrizione = :descrizione"),
+ @NamedQuery(name = "Visite.findByImmagineCopertina", query = "SELECT v FROM Visite v WHERE v.immagineCopertina = :immagineCopertina"),
+ @NamedQuery(name = "Visite.findByTipo", query = "SELECT v FROM Visite v WHERE v.tipo = :tipo"),
+ @NamedQuery(name = "Visite.findByDataInizio", query = "SELECT v FROM Visite v WHERE v.dataInizio = :dataInizio"),
+ @NamedQuery(name = "Visite.findByDataFine", query = "SELECT v FROM Visite v WHERE v.dataFine = :dataFine")})*/
 public class Visita implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -69,7 +88,7 @@ public class Visita implements Serializable {
     @Column(name = "DataFine")
     @Temporal(TemporalType.DATE)
     private Date dataFine;
-    @OneToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "codiceVisita")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "codiceVisita")
     private Collection<Biglietto> bigliettiCollection;
 
     public Visita() {
@@ -184,5 +203,5 @@ public class Visita implements Serializable {
     public String toString() {
         return "museo.db.Visite[ codiceVisita=" + codiceVisita + " ]";
     }
-    
+
 }
