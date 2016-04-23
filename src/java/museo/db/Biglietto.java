@@ -30,8 +30,19 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author FSEVERI\magro3026
  */
+
+
 @Entity
 @Table(name = "Biglietti")
+@NamedQueries(  
+    {  
+        @NamedQuery(  
+            name = "getBiglietti",  
+            query = "FROM Biglietto B WHERE B.nomeUtente= :nome_Utente AND B.dataPrenotazione= :data_Prenotazione"  
+        ) 
+
+    }
+)
 /*@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Biglietti.findAll", query = "SELECT b FROM Biglietti b"),

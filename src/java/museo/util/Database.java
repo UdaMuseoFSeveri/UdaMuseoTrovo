@@ -33,7 +33,7 @@ public class Database {
         String username = utente.getNomeUtente();
         try {
             tx = session.beginTransaction();
-            Query q = session.createSQLQuery("SELECT Password FROM Utente where NomeUtente= :nome_Utente ").addEntity(Utente.class);
+            Query q = session.getNamedQuery("checkPassword");//.addEntity(Utente.class);
             q.setParameter("nome_Utente", username);
             if (q.list().isEmpty()) {
                 return 1;
@@ -87,7 +87,7 @@ public class Database {
         Session session = factory.openSession();
         try {
             tx = session.beginTransaction();
-            Query q = session.createSQLQuery("FROM Biglietti where NomeUtente= :nome_Utente AND DataPrenotazione= :data_Prenotazione ").addEntity(Biglietto.class);
+            Query q = session.getNamedQuery("getBigliettiFromDate");//.addEntity(Biglietto.class);
             q.setParameter("nome_Utente", username);
             q.setParameter("data_Prenotazione", timestamp);
             return q.list();
@@ -107,7 +107,7 @@ public class Database {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Query query = session.getNamedQuery("FROM Visite WHERE Tipo='E'  AND  DataInizio>=:data_Ini  AND  DataFine<=:data_Fine");
+            Query query = session.getNamedQuery("getVisiteFromDate");
             query.setParameter("data_Ini", dataInizio);
             query.setParameter("data_Fine", dataFine);
             List risultati = query.list();
@@ -128,7 +128,7 @@ public class Database {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Query query = session.createSQLQuery("FROM Visite WHERE Tipo='V'").addEntity(Visita.class);
+            Query query = session.getNamedQuery("getVisite");//.addEntity(Visita.class);
             List risultati = query.list();
             return risultati;
         } catch (HibernateException e) {
@@ -147,7 +147,7 @@ public class Database {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Query q = session.createSQLQuery("FROM Visite WHERE CodiceVisita=:codice_Visita ").addEntity(Visita.class);
+            Query q = session.getNamedQuery("getEventoById");//.addEntity(Visita.class);
             q.setParameter("codice_Visita", id);
             if (q.list().size() > 0) {
               return (Visita) q.list().get(0);
@@ -168,7 +168,7 @@ public class Database {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Query query = session.createSQLQuery("FROM Categorie").addEntity(Categoria.class);
+            Query query = session.getNamedQuery("getCategorie");//.addEntity(Categoria.class);
             List risultati = query.list();
             return risultati;
         } catch (HibernateException e) {
@@ -187,7 +187,7 @@ public class Database {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Query query = session.createSQLQuery("FROM Servizi").addEntity(Servizio.class);
+            Query query = session.getNamedQuery("FROM Servizi");//.addEntity(Servizio.class);
             List risultati = query.list();
             return risultati;
         } catch (HibernateException e) {
@@ -206,8 +206,8 @@ public class Database {
         Session session = factory.openSession();
         try {
             tx = session.beginTransaction();
-            Query q = session.createSQLQuery("SELECT NomeUtente FROM Utente where NomeUtente= :nome_Utente ").addEntity(Utente.class);
-            q.setParameter("nome_Utente", utente);
+            Query q = session.getNamedQuery("checkUtente");//.addEntity(Utente.class);
+            q.setParameter("utente", utente);
             if (q.list().isEmpty()) {
                 return 0;
             }

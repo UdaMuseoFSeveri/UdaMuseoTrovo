@@ -24,8 +24,18 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author FSEVERI\magro3026
  */
+
 @Entity
 @Table(name = "Servizi")
+@NamedQueries(  
+    {  
+        @NamedQuery(  
+            name = "getServizi",  
+            query = "FROM Servizio"  
+        ) 
+
+    }
+)
 /*@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Servizi.findAll", query = "SELECT s FROM Servizi s"),
