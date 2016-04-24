@@ -13,39 +13,55 @@
         <header id="myCarousel" class="carousel slide">
             <!-- Indicators -->
             <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
+                <c:set var="c" value="0"></c:set>
+                <c:forEach items="${visite}" var="visita">
+                    <c:if test="${c==0}">
+                        <li data-target="#myCarousel" data-slide-to="${c}" class="active"></li>
+                    </c:if>
+                    <c:if test="${c>0}">
+                        <li data-target="#myCarousel" data-slide-to="${c}"></li>
+                    </c:if>
+                    <c:set var="c" value="${c+1}"></c:set>
+                </c:forEach>
             </ol>
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
+                <c:set var="i" value="0"></c:set>
                 <c:forEach items="${visite}" var="visita">
-                    <c:if test="${visita.getCodiceCategoria() < 2}">
-                        <div class="item active">
-                            <div class="fill" style="background-image:url('${visita.getImmagineCopertina()}');"></div>
-                            <div class="carousel-caption">
-                                <h2>${visita.getTitolo()}</h2>
+                    <c:if test="${i == 0}">
+                        
+                            <div class="item active">
+                                <a href="./visita?codice=${visita.getCodiceVisita()}">
+                                <div class="fill" style="background-image:url('${visita.getImmagineCopertina()}');"></div>
+                                <div class="carousel-caption">
+                                    <h2>${visita.getTitolo()}</h2>
+                                </div>
+                                </a>
                             </div>
-                        </div>
+                        
                     </c:if>
-                    <c:if test="${visita.getCodiceCategoria() > 1}">
-                        <div class="item">
-                            <div class="fill" style="background-image:url('${visita.getImmagineCopertina()}');"></div>
-                            <div class="carousel-caption">
-                                <h2>${visita.getTitolo()}/h2>
+                    <c:if test="${i > 0}">
+                        
+                            <div class="item">
+                                <a href="./visita?codice=${visita.getCodiceVisita()}">
+                                <div class="fill" style="background-image:url('${visita.getImmagineCopertina()}');"></div>
+                                <div class="carousel-caption">
+                                    <h2>${visita.getTitolo()}</h2>
+                                </div>
+                                </a>
                             </div>
-
-                        </div>
                     </c:if>
-                    <!-- Controls -->
+                   
+                    <c:set var="i" value="${i+1}"></c:set>
+                </c:forEach>
+                 <!-- Controls -->
                     <a class="left carousel-control" href="#myCarousel" data-slide="prev">
                         <span class="icon-prev"></span>
                     </a>
                     <a class="right carousel-control" href="#myCarousel" data-slide="next">
                         <span class="icon-next"></span>
                     </a>
-                </c:forEach>
             </div>
         </header>
 

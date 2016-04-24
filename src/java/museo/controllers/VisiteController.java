@@ -6,7 +6,7 @@
 package museo.controllers;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import museo.db.Visita;
 import museo.util.Database;
 import org.springframework.stereotype.Controller;
@@ -19,20 +19,21 @@ public class VisiteController {
     private Database db;
     private ArrayList <Visita> esposizioni;
     private ArrayList <Visita> visite_base;
-    private Date dInizio=new Date(2016,01,01);
-    private Date dFine=new Date(2016,12,31);
+    private Date dInizio;
+    private Date dFine;
     
     public VisiteController(){
         db = new Database();
-        Date dInizio=new Date(2016,01,01);
-        Date dFine=new Date(2016,12,31);
+        long in = 1451602800000L;
+        dInizio = new Date(in);
+        long fine = 1483138800000L;
+        dFine = new Date(fine);
         visite_base=(ArrayList<Visita>) db.getVisite();
         esposizioni=(ArrayList<Visita>) db.getVisiteFromDate(dInizio, dFine);
     }
     
     @RequestMapping(value="/visite")
     public String visiteMuseo(ModelMap map){
-        System.out.println(dInizio.getYear()+"/"+dInizio.getMonth()+"/"+dInizio.getDay()+"CAZZOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"+ dFine.getYear()+"/"+dFine.getMonth()+"/"+dFine.getDay());
         map.put("visite",esposizioni); 
         map.put("visiteBase",visite_base);
         return "visite";
@@ -40,8 +41,6 @@ public class VisiteController {
     
     @RequestMapping(value={"","/homepage","/",})
     public String homeMuseo(ModelMap map){
-        Date dInizio=new Date(2016,01,01);
-        Date dFine=new Date(2016,12,31);
         map.put("visite",esposizioni); 
         map.put("visiteBase",visite_base);
         return "index";
