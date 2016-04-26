@@ -28,12 +28,15 @@ public class AccessoController {
         int i;
         i = db.verificaUtente(new Utente(nomeUtente, password));
         if (i == 1) {
-            return "login?indb=false";
+            map.put("risposta","indb=false");
+            //return "login?indb=false";
         }
-        if (i == 0) {
-            return "/";
+        else if (i == 0) {
+            map.put("risposta","/");
+        }else{
+            map.put("risposta","pswdErr=true");
         }
-        return "login?pswdErr=true";
+        return "login";
 
     }
 
