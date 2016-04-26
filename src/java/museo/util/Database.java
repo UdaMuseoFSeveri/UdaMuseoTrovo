@@ -5,7 +5,6 @@
  */
 package museo.util;
 
-
 import java.sql.Date;
 import java.util.List;
 import museo.db.*;
@@ -35,7 +34,7 @@ public class Database {
         String username = utente.getNomeUtente();
         try {
             tx = session.beginTransaction();
-            Query q = session.getNamedQuery("checkPassword");//.addEntity(Utente.class);
+            Query q = session.getNamedQuery("checkPassword");
             q.setParameter("nome_Utente", username);
             if (q.list().isEmpty()) {
                 return 1;
@@ -89,7 +88,7 @@ public class Database {
         Session session = factory.openSession();
         try {
             tx = session.beginTransaction();
-            Query q = session.getNamedQuery("getBigliettiFromDate");//.addEntity(Biglietto.class);
+            Query q = session.getNamedQuery("getBigliettiFromDate");
             q.setParameter("nome_Utente", username);
             q.setParameter("data_Prenotazione", timestamp);
             return q.list();
@@ -113,8 +112,8 @@ public class Database {
             query.setParameter("data_Ini", dataInizio);
             query.setParameter("data_Fine", dataFine);
             if (query.list().size() > 0) {
-              List<Visita> risultati = query.list();
-              return risultati;
+                List<Visita> risultati = query.list();
+                return risultati;
             }
         } catch (HibernateException e) {
             if (tx != null) {
@@ -132,7 +131,7 @@ public class Database {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Query query = session.getNamedQuery("getVisite");//.addEntity(Visita.class);
+            Query query = session.getNamedQuery("getVisite");
             List risultati = query.list();
             return risultati;
         } catch (HibernateException e) {
@@ -151,10 +150,10 @@ public class Database {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Query q = session.getNamedQuery("getEventoById");//.addEntity(Visita.class);
+            Query q = session.getNamedQuery("getEventoById");
             q.setParameter("codice_Visita", id);
             if (q.list().size() > 0) {
-              return (Visita) q.list().get(0);
+                return (Visita) q.list().get(0);
             }
         } catch (HibernateException e) {
             if (tx != null) {
@@ -172,7 +171,7 @@ public class Database {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Query query = session.getNamedQuery("getCategorie");//.addEntity(Categoria.class);
+            Query query = session.getNamedQuery("getCategorie");
             List risultati = query.list();
             return risultati;
         } catch (HibernateException e) {
@@ -191,7 +190,7 @@ public class Database {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Query query = session.getNamedQuery("getServizi");//.addEntity(Servizio.class);
+            Query query = session.getNamedQuery("getServizi");
             List risultati = query.list();
             return risultati;
         } catch (HibernateException e) {
@@ -210,7 +209,7 @@ public class Database {
         Session session = factory.openSession();
         try {
             tx = session.beginTransaction();
-            Query q = session.getNamedQuery("checkUtente");//.addEntity(Utente.class);
+            Query q = session.getNamedQuery("checkUtente");
             q.setParameter("utente", utente);
             if (q.list().isEmpty()) {
                 return 0;
@@ -226,4 +225,25 @@ public class Database {
         return 1;
     }
 
+    public List<Biglietto> getBigliettiForReview(String nomeUtente) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Query query = session.getNamedQuery("getBigliettiForReview");
+            query.setParameter("nome_Utente", nomeUtente);
+            if (query.list().size() > 0) {
+                List<Biglietto> risultati = query.list();
+                return risultati;
+            }
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
 }

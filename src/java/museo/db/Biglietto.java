@@ -30,27 +30,30 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author FSEVERI\magro3026
  */
+@NamedQueries(
+        {
+            @NamedQuery(
+                    name = "getBiglietti",
+                    query = "FROM Biglietto B WHERE B.nomeUtente= :nome_Utente AND B.dataPrenotazione= :data_Prenotazione"
+            ),
 
+            @NamedQuery(
+                    name = "getBigliettiForReview",
+                    query = "FROM Biglietto B WHERE B.nomeUtente= :nome_Utente GROUP BY B.dataPrenotazione"
+            )
 
-
-@NamedQueries(  
-    {  
-        @NamedQuery(  
-            name = "getBiglietti",  
-            query = "FROM Biglietto B WHERE B.nomeUtente= :nome_Utente AND B.dataPrenotazione= :data_Prenotazione"  
-        ) 
-
-    }
+        }
 )
 @Entity
 @Table(name = "Biglietti")
 /*@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Biglietti.findAll", query = "SELECT b FROM Biglietti b"),
-    @NamedQuery(name = "Biglietti.findByCodiceBiglietto", query = "SELECT b FROM Biglietti b WHERE b.codiceBiglietto = :codiceBiglietto"),
-    @NamedQuery(name = "Biglietti.findByDataValidita", query = "SELECT b FROM Biglietti b WHERE b.dataValidita = :dataValidita"),
-    @NamedQuery(name = "Biglietti.findByDataPrenotazione", query = "SELECT b FROM Biglietti b WHERE b.dataPrenotazione = :dataPrenotazione")})*/
+ @NamedQueries({
+ @NamedQuery(name = "Biglietti.findAll", query = "SELECT b FROM Biglietti b"),
+ @NamedQuery(name = "Biglietti.findByCodiceBiglietto", query = "SELECT b FROM Biglietti b WHERE b.codiceBiglietto = :codiceBiglietto"),
+ @NamedQuery(name = "Biglietti.findByDataValidita", query = "SELECT b FROM Biglietti b WHERE b.dataValidita = :dataValidita"),
+ @NamedQuery(name = "Biglietti.findByDataPrenotazione", query = "SELECT b FROM Biglietti b WHERE b.dataPrenotazione = :dataPrenotazione")})*/
 public class Biglietto implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -174,5 +177,5 @@ public class Biglietto implements Serializable {
     public String toString() {
         return "museo.db.Biglietti[ codiceBiglietto=" + codiceBiglietto + " ]";
     }
-    
+
 }
