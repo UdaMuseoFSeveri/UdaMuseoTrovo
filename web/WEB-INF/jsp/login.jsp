@@ -5,6 +5,7 @@
     <head>
         <title>Login</title>
         <jsp:include page="head.jsp"/>
+        <jsp:include page="menu.jsp"/>
         <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
         <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
@@ -65,35 +66,54 @@
                                 <div class="col-lg-12">
                                     <%
                                         String risp = request.getParameter("risposta");
-                                        if (risp.equals("pswdErr=true")) {
-                                            out.print("<p style='color: red; text-align: center;'><b>Password errata!!!</b></p>");
-                                        }
-                                        if (risp.equals("pswdErr=false")) {
-                                            String resp = request.getParameter("indb");
-                                            if (resp.equals("true")) {
+                                        if (risp != null) {
+
+                                            if (risp.equals("-1")) {
+                                                out.print("<p style='color: red; text-align: center;'><b>Password errata!!!</b></p>");
+                                            } else if (risp.equals("1")) {
                                                 out.print("<p style='color: red; text-align: center;'><b>Utente non trovato, registrati!</b></p>");
-                                            }
-                                        }
-                                        if (request.getParameter("risposta") != null) {
-                                            String resp = request.getParameter("dupplicate");
-                                            if (resp.equals("true")) {
-                                                out.print("<p style='color: red; text-align: center;'><b>Utente gia' presente, scegli un altro nome!</b></p>");
-                                            }
-                                        }
-                                        if (request.getParameter("risposta") != null) {
-                                            String resp = request.getParameter("errorPass");
-                                            if (resp.equals("true")) {
-                                                out.print("<p style='color: red; text-align: center;'><b>Password non corrispondenti, scrivi correttamente le password!</b></p>");
+                                            } else {
+                                                user.setNomeUtente(request.getParameter("utente"));
+                                                response.sendRedirect("./homepage");
                                             }
                                         }
 
-                                        //inizio form
+                                        /**
+                                         * String risp =
+                                         * request.getParameter("risposta"); if
+                                         * (risp.equals("pswdErr=true")) {
+                                         * out.print("<p style='color: red; text-align: center;'><b>Password
+                                         * errata!!!</b></p>"); } if
+                                         * (risp.equals("pswdErr=false")) {
+                                         * String resp =
+                                         * request.getParameter("indb"); if
+                                         * (resp.equals("true")) {
+                                         * out.print("<p style='color: red; text-align: center;'><b>Utente
+                                         * non trovato, registrati!</b></p>"); }
+                                         * } if
+                                         * (request.getParameter("risposta") !=
+                                         * null) { String resp =
+                                         * request.getParameter("dupplicate");
+                                         * if (resp.equals("true")) {
+                                         * out.print("<p style='color: red; text-align: center;'><b>Utente
+                                         * gia' presente, scegli un altro
+                                         * nome!</b></p>"); } } if
+                                         * (request.getParameter("risposta") !=
+                                         * null) { String resp =
+                                         * request.getParameter("errorPass"); if
+                                         * (resp.equals("true")) {
+                                         * out.print("<p style='color: red; text-align: center;'><b>Password
+                                         * non corrispondenti, scrivi
+                                         * correttamente le password!</b></p>");
+                                         * } }
+                                         *
+                                         */
+                                        //inizio form                                           
                                         out.print("<form id='login-form' action='./verificaLogin' method='post' role='form'");
                                         if (request.getParameter("indb") != null || request.getParameter("dupplicate") != null || request.getParameter("errorPass") != null) {
                                             out.print(" style='display: none;'>");
                                         } else {
-                                            out.print(" style='display: block;'>");
-                                        }
+                                            out.print(" style='display:block;'>"); }
 
                                     %>
                                     <div class="form-group">
