@@ -1,16 +1,11 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <jsp:useBean id="user" class="museo.db.Utente" scope="session" />
 
 
 <html>
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Login</title>
+        <jsp:include page="head.jsp"/>
         <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
-        <link href="../css/login.css" rel="stylesheet">
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
         <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
         <script type="text/javascript">
@@ -34,6 +29,7 @@
             });</script>
     </head>
     <body>
+        <jsp:include page="menu.jsp"/>
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
