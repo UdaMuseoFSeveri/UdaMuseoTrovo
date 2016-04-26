@@ -51,7 +51,7 @@
                             <a href="./visite">Visualizza Ordini</a>
                         </li>
                         <li>
-                            <a href=".logout">Logout</a>
+                            <a href="./logout">Logout</a>
                         </li>
                     </ul>
                 </li>
