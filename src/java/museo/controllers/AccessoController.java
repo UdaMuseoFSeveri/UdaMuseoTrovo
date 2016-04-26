@@ -27,15 +27,23 @@ public class AccessoController {
     public String verificaLogin(ModelMap map, @RequestParam(value = "utente", required = true) String nomeUtente, @RequestParam(value = "password", required = true) String password) {
         int i;
         i = db.verificaUtente(new Utente(nomeUtente, password));
+        String s= ""+i;
+        map.put("risposta",s);
+        map.put("utente",nomeUtente);
+        /**
         if (i == 1) {
             map.put("risposta","indb=false");
             //return "login?indb=false";
+
         }
         else if (i == 0) {
-            map.put("risposta","/");
+           map.put("risposta","/");
+
         }else{
-            map.put("risposta","pswdErr=true");
+           map.put("risposta","pswdErr=true");
+
         }
+        **/
         return "login";
 
     }
