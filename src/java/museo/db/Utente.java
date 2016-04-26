@@ -25,8 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author FSEVERI\magro3026
  */
 
-@Entity
-@Table(name = "Utenti")
+
 @NamedQueries(  
     {  
         @NamedQuery(  
@@ -40,6 +39,8 @@ import javax.xml.bind.annotation.XmlTransient;
 
     }
 )
+@Entity
+@Table(name = "Utenti")
 /*@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Utenti.findAll", query = "SELECT u FROM Utenti u"),

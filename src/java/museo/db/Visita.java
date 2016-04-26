@@ -29,8 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author FSEVERI\magro3026
  */
-@Entity
-@Table(name = "Visite")
+
 @NamedQueries(
         {
             @NamedQuery(
@@ -49,6 +48,8 @@ import javax.xml.bind.annotation.XmlTransient;
         }
                 
 )
+@Entity
+@Table(name = "Visite")
 public class Visita implements Serializable {
 
     private static final long serialVersionUID = 1L;
