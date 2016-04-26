@@ -7,7 +7,7 @@ package museo.db;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
+import java.sql.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -49,17 +49,6 @@ import javax.xml.bind.annotation.XmlTransient;
         }
                 
 )
-/*@XmlRootElement
- @NamedQueries({
- @NamedQuery(name = "Visite.findAll", query = "SELECT v FROM Visite v"),
- @NamedQuery(name = "Visite.findByCodiceVisita", query = "SELECT v FROM Visite v WHERE v.codiceVisita = :codiceVisita"),
- @NamedQuery(name = "Visite.findByTitolo", query = "SELECT v FROM Visite v WHERE v.titolo = :titolo"),
- @NamedQuery(name = "Visite.findByTariffa", query = "SELECT v FROM Visite v WHERE v.tariffa = :tariffa"),
- @NamedQuery(name = "Visite.findByDescrizione", query = "SELECT v FROM Visite v WHERE v.descrizione = :descrizione"),
- @NamedQuery(name = "Visite.findByImmagineCopertina", query = "SELECT v FROM Visite v WHERE v.immagineCopertina = :immagineCopertina"),
- @NamedQuery(name = "Visite.findByTipo", query = "SELECT v FROM Visite v WHERE v.tipo = :tipo"),
- @NamedQuery(name = "Visite.findByDataInizio", query = "SELECT v FROM Visite v WHERE v.dataInizio = :dataInizio"),
- @NamedQuery(name = "Visite.findByDataFine", query = "SELECT v FROM Visite v WHERE v.dataFine = :dataFine")})*/
 public class Visita implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -83,10 +72,10 @@ public class Visita implements Serializable {
     @Column(name = "Tipo")
     private Character tipo;
     @Column(name = "DataInizio")
-    @Temporal(TemporalType.DATE)
+    //@Temporal(TemporalType.DATE)
     private Date dataInizio;
     @Column(name = "DataFine")
-    @Temporal(TemporalType.DATE)
+    //@Temporal(TemporalType.DATE)
     private Date dataFine;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "codiceVisita")
     private Collection<Biglietto> bigliettiCollection;

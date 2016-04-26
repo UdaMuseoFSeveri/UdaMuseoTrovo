@@ -5,7 +5,9 @@
  */
 package museo.util;
 
-import java.util.*;
+
+import java.sql.Date;
+import java.util.List;
 import museo.db.*;
 import org.hibernate.*;
 
@@ -110,8 +112,10 @@ public class Database {
             Query query = session.getNamedQuery("getVisiteFromDate");
             query.setParameter("data_Ini", dataInizio);
             query.setParameter("data_Fine", dataFine);
-            List risultati = query.list();
-            return risultati;
+            if (query.list().size() > 0) {
+              List<Visita> risultati = query.list();
+              return risultati;
+            }
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -187,7 +191,7 @@ public class Database {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Query query = session.getNamedQuery("FROM Servizi");//.addEntity(Servizio.class);
+            Query query = session.getNamedQuery("getServizi");//.addEntity(Servizio.class);
             List risultati = query.list();
             return risultati;
         } catch (HibernateException e) {

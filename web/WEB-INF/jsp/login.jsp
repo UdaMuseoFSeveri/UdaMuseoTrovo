@@ -64,22 +64,23 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <%
-                                        if (request.getParameter("pswdErr") != null) {
+                                        String risp = request.getParameter("risposta");
+                                        if (risp.equals("pswdErr=true")) {
                                             out.print("<p style='color: red; text-align: center;'><b>Password errata!!!</b></p>");
                                         }
-                                        if (request.getParameter("indb") != null) {
+                                        if (risp.equals("pswdErr=false")) {
                                             String resp = request.getParameter("indb");
                                             if (resp.equals("true")) {
                                                 out.print("<p style='color: red; text-align: center;'><b>Utente non trovato, registrati!</b></p>");
                                             }
                                         }
-                                        if (request.getParameter("dupplicate") != null) {
+                                        if (request.getParameter("risposta") != null) {
                                             String resp = request.getParameter("dupplicate");
                                             if (resp.equals("true")) {
                                                 out.print("<p style='color: red; text-align: center;'><b>Utente gia' presente, scegli un altro nome!</b></p>");
                                             }
                                         }
-                                        if (request.getParameter("errorPass") != null) {
+                                        if (request.getParameter("risposta") != null) {
                                             String resp = request.getParameter("errorPass");
                                             if (resp.equals("true")) {
                                                 out.print("<p style='color: red; text-align: center;'><b>Password non corrispondenti, scrivi correttamente le password!</b></p>");
@@ -87,7 +88,7 @@
                                         }
 
                                         //inizio form
-                                        out.print("<form id='login-form' action='controlla_login.jsp' method='post' role='form'");
+                                        out.print("<form id='login-form' action='./verificaLogin' method='post' role='form'");
                                         if (request.getParameter("indb") != null || request.getParameter("dupplicate") != null || request.getParameter("errorPass") != null) {
                                             out.print(" style='display: none;'>");
                                         } else {
@@ -96,7 +97,7 @@
 
                                     %>
                                     <div class="form-group">
-                                        <input name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="" type="text" required/>
+                                        <input name="utente" id="utente" tabindex="1" class="form-control" placeholder="Username" value="" type="text" required/>
                                     </div>
                                     <div class="form-group">
                                         <input name="password" id="password" tabindex="2" class="form-control" placeholder="Password" type="password" required/>
@@ -113,7 +114,7 @@
                                         </div>
                                     </div>
                                     </form>
-                                    <%                                    out.print("<form id='register-form' action='registra.jsp' method='post' role='form'");
+                                    <%out.print("<form id='register-form' action='./registra' method='post' role='form'");
                                         if (request.getParameter("indb") != null || request.getParameter("dupplicate") != null || request.getParameter("errorPass") != null) {
                                             out.print(" style='display: block;'>");
                                         } else {
@@ -121,13 +122,13 @@
                                         }
                                     %>
                                     <div class="form-group">
-                                        <input name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="" type="text" required/>
+                                        <input name="utente" id="username" tabindex="1" class="form-control" placeholder="Username" value="" type="text" required/>
                                     </div>
                                     <div class="form-group">
                                         <input name="password" id="password" tabindex="2" class="form-control" placeholder="Password" type="password" required/>
                                     </div>
                                     <div class="form-group">
-                                        <input name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password" type="password" required/>
+                                        <input name="verificaPassword" id="verificaPassword" tabindex="2" class="form-control" placeholder="Confirm Password" type="password" required/>
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
