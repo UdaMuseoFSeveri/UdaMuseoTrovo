@@ -102,6 +102,44 @@ public class Database {
         }
         return null;
     }
+    
+    public float getRicavoEsposizioni(int codiceVisita) {
+        Transaction tx = null;
+        Session session = factory.openSession();
+        try {
+            tx = session.beginTransaction();
+            Query q = session.getNamedQuery("getRicavoEsposizioni");
+            q.setParameter("codice_Visita", codiceVisita);
+            return (float) q.list().get(0);
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return 0;
+    }
+    
+    public List<Biglietto> getNBigliettiEspozioni(int codiceVisita) {
+        Transaction tx = null;
+        Session session = factory.openSession();
+        try {
+            tx = session.beginTransaction();
+            Query q = session.getNamedQuery("getNBigliettiEspozioni");
+            q.setParameter("codice_Visita", codiceVisita);
+            return q.list();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
 
     public List<Visita> getVisiteFromDate(Date dataInizio, Date dataFine) {
         Session session = factory.openSession();
