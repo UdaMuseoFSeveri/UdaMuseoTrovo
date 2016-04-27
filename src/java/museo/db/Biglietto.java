@@ -40,6 +40,17 @@ import javax.xml.bind.annotation.XmlTransient;
             @NamedQuery(
                     name = "getBigliettiForReview",
                     query = "FROM Biglietto B WHERE B.nomeUtente= :nome_Utente GROUP BY B.dataPrenotazione"
+            ),
+            
+            @NamedQuery(
+                    name = "getNBigliettiEspozioni",
+                    query = "SELECT COUNT(*) FROM Biglietto B, Visita V WHERE B.CodiceVisita = V.CodiceVisita  AND  V.Tipo='E'  AND  B.CodiceVisita = :codice_Visita"
+            ),
+            
+            @NamedQuery(
+                    name = "getRicavoEsposizioni",
+                    query = "SELECT SUM(Tariffa-(Tariffa*Sconto/100)) AS RicavoBiglietti FROM Biglietto B, Visita V, Categoria C" +
+                            "WHERE B.CodiceVisita=V.CodiceVisita  AND  Tipo='E' AND V.CodiceVisita= :codice_Visita AND  C.CodiceCategoria=B.CodiceCategoria"
             )
 
         }
