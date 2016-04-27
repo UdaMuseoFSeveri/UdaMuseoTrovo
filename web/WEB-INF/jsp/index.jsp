@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<jsp:useBean id="user" class="museo.db.Utente" scope="session" />
 <html lang="en">
     <!-- Navigation -->
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -84,88 +85,27 @@
                             <div class="panel-body">
                                 <p>${visita.getDescrizione()}</p>  
                             </div>
-                            <a href="./visita?codice=${visita.getCodiceVisita()}" class="btn btn-default"> Scopri</a>  
+                            <a href="./visita?codice=${visita.getCodiceVisita()}" class="btn btn-default" style=" margin-left: 10px;"> Scopri</a>  
                         </div>
                     </div>             
                 </c:forEach>
             </div>
-            <!-- /.row -->
-
-            <!-- Portfolio Section 
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="page-header">Portfolio Heading</h2>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="portfolio-item.jsp">
-                        <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="portfolio-item.jsp">
-                        <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="portfolio-item.jsp">
-                        <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="portfolio-item.jsp">
-                        <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="portfolio-item.jsp">
-                        <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="portfolio-item.jsp">
-                        <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-                    </a>
-                </div>
-            </div>
-            row -->
-
-            <!-- Features Section -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="page-header">Modern Business Features</h2>
-                </div>
-                <div class="col-md-6">
-                    <p>The Modern Business template by Start Bootstrap includes:</p>
-                    <ul>
-                        <li><strong>Bootstrap v3.2.0</strong>
-                        </li>
-                        <li>jQuery v1.11.0</li>
-                        <li>Font Awesome v4.1.0</li>
-                        <li>Working PHP contact form with validation</li>
-                        <li>Unstyled page elements for easy customization</li>
-                        <li>17 HTML pages</li>
-                    </ul>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
-                </div>
-                <div class="col-md-6">
-                    <img class="img-responsive" src="http://placehold.it/700x450" alt="">
-                </div>
-            </div>
-            <!-- /.row -->
-
-            <hr>
-
-            <!-- Call to Action Section -->
+            <br>
+            <%
+                String nome =user.getNomeUtente();
+                if (nome != null) {
+            %>
             <div class="well">
                 <div class="row">
-                    <div class="col-md-8">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
+                    <div class="col-md-8">                    
+                        <p>Visualizza i tuoi ordini</p>
                     </div>
                     <div class="col-md-4">
                         <a class="btn btn-lg btn-default btn-block" href="#">Call to Action</a>
                     </div>
                 </div>
             </div>
+            <%}%>
 
             <jsp:include page="footer.jsp"/>
             <!-- Script to Activate the Carousel -->
