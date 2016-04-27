@@ -21,7 +21,7 @@
                     <a href="./servizi">Servizi</a>
                 </li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown">Visita <b class="caret"></b></a>
+                    <a class="dropdown-toggle" data-toggle="dropdown"href="#">Visita <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="./visite">Visite</a>
