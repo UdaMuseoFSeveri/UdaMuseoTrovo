@@ -5,6 +5,8 @@
     <head>
         <jsp:include page="head.jsp"/>
         <title>Servizi</title>
+        <link href="./resources/css/visita.css" rel="stylesheet">
+        <script src="./resources/js/jquery.js"></script>
         <script src="./resources/js/prenotazione_biglietto.js"></script>
     </head>
     <body>     
@@ -45,17 +47,17 @@
                     }
                     %>
                     <h3>Prezzo</h3>
-                    <p>${visita.tariffa} &euro;</p>
-                    <button class="btn btn-primary">Acquista Biglietti</button>
+                    <p id="prezzo">${visita.tariffa} &euro;</p>
+                    <button id="add-biglietti" class="btn btn-primary">Acquista Biglietti</button>
                 </div>
 
             </div>
             <!-- /.row -->
-            <div class="row" id="prenota-biblietto">
+            <div class="row invis" id="prenota-biblietto">
                 <div class="col-lg-12">
                     <h2>Prenota i tuoi biglietti</h2>
                 </div><br/><br/><br/>
-                <table>
+                <table id="biglietti" class="table">
                     <tr>
                         <th>Biglietto numero</th>
                         <th>Visita</th>
@@ -63,29 +65,30 @@
                         <th>Prezzo</th>
                         <th>Validit&agrave;</th>
                     </tr>
-                    <tr>
-                        <td><script type="text/javascript">getNumBiglietto()</script></td>
-                        <td>${visita.titolo}</td>
-                        <td>
-                            <select id="categorie">
+                    <tr id="b1">
+                        <td id="b-numB1"></td>
+                        <td id="b-titolo1">${visita.titolo}</td>
+                        <td id="b-categoria1">
+                            <select id="categorie1" name="cat">
                                 <c:forEach items="${categorie}" var="categoria">
                                     <option value="${categoria.sconto}">${categoria.titolo}</option>
                                 </c:forEach>
                             </select>
                         </td>
-                        <td>
-                            <%
-                                //prezzo
-                                long prezzo = v.getTariffa();
-                                out.print("<script type='text/javascript'>getTariffa("+prezzo+",categorie)</script>");
-                            %>
+                        <td id="b-price1">
+                            ${visita.tariffa}
                         </td>
-                        <td>
-                            12/12/2016
+                        <td id="b-validita1">
+                            <%
+                            if(v.getTipo() == 'E') out.print(v.getDataFine());
+                            
+                            %>
                         </td>
                     
                     </tr>
+                    
                 </table>
+                        <button id="add" class="btn btn-info glyphicon glyphicon-plus"></button>
             </div>
             <!-- Related Projects Row -->
             <!--<div class="row">
