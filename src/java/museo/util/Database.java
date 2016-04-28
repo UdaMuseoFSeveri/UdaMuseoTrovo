@@ -102,15 +102,15 @@ public class Database {
         }
         return null;
     }
-    
+
     public float getRicavoEsposizioni(int codiceVisita) {
         Transaction tx = null;
         Session session = factory.openSession();
         try {
             tx = session.beginTransaction();
-            Query q = session.getNamedQuery("getRicavoEsposizioni");
+            Query q = session.createSQLQuery("getRicavoEsposizioni");
             q.setParameter("codice_Visita", codiceVisita);
-            return (float) q.list().get(0);
+            return (float) q.uniqueResult();
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -122,14 +122,14 @@ public class Database {
         return 0;
     }
     
-    public List<Biglietto> getNBigliettiEspozioni(int codiceVisita) {
+    public int getNBigliettiEspozioni(int codiceVisita) {
         Transaction tx = null;
         Session session = factory.openSession();
         try {
             tx = session.beginTransaction();
             Query q = session.getNamedQuery("getNBigliettiEspozioni");
             q.setParameter("codice_Visita", codiceVisita);
-            return q.list();
+            return (Integer) q.uniqueResult();
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -138,7 +138,7 @@ public class Database {
         } finally {
             session.close();
         }
-        return null;
+        return 0;
     }
 
     public List<Visita> getVisiteFromDate(Date dataInizio, Date dataFine) {
