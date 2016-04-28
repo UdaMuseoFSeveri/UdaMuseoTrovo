@@ -18,8 +18,31 @@ public class AccessoController {
 
     private Database db = new Database();
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginPage(ModelMap map) {
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String loginPage(ModelMap map, @RequestParam(value = "utente", required = false) String nomeUtente, @RequestParam(value = "password", required = false) String password) {
+        if(nomeUtente != null && password != null ){
+            int i;
+            i = db.verificaUtente(new Utente(nomeUtente, password));
+           /**
+            String s= ""+i;
+            map.put("risposta",s);
+            map.put("utente",nomeUtente);
+            **/
+
+            if (i == 1) {
+                map.put("risposta","Il nome utente è inesistente");
+
+            }
+            else if (i == 0) {
+                //login affettuato correttamente
+               map.put("username",nomeUtente);
+               map.put("accesso",true);
+            }else{
+               map.put("risposta","La password è errata");
+               return "login";
+
+            }
+        }
         return "login";
     }
 
@@ -27,24 +50,28 @@ public class AccessoController {
     public String verificaLogin(ModelMap map, @RequestParam(value = "utente", required = true) String nomeUtente, @RequestParam(value = "password", required = true) String password) {
         int i;
         i = db.verificaUtente(new Utente(nomeUtente, password));
+       /**
         String s= ""+i;
         map.put("risposta",s);
         map.put("utente",nomeUtente);
-        /**
+        **/
+        
         if (i == 1) {
-            map.put("risposta","indb=false");
-            //return "login?indb=false";
+            map.put("risposta","Il nome utente è inesistente");
+            return "login";
 
         }
         else if (i == 0) {
-           map.put("risposta","/");
+           map.put("username",nomeUtente);
+           map.put("password",password);
+           return "accessoEffettuato";
 
         }else{
-           map.put("risposta","pswdErr=true");
+           map.put("risposta","La password è errata");
+           return "login";
 
         }
-        **/
-        return "login";
+        
 
     }
 
