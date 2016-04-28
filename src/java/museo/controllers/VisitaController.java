@@ -26,6 +26,8 @@ public class VisitaController {
     @RequestMapping(value="/visita")
     public String visitaMuseo(ModelMap map,@RequestParam(value="codice", required=true)int id){
         map.put("visita",db.getEventoById(id));
+        map.put("categorie",db.getCategorie());
+        map.put("servizi", db.getServizi());
         return "visita";
     }
 }
