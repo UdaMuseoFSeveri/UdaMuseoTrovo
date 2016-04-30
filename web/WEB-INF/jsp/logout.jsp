@@ -1,5 +1,5 @@
 <%
     session.invalidate();
-    String location = "./login";
+    String location = "./homepage";
     response.sendRedirect(location);
 %>

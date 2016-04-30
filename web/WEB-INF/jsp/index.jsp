@@ -112,8 +112,8 @@
 
             <script>
                 $('.carousel').carousel({
-                    interval: 5000 //changes the speed
-                })
+                    interval: 3500 //changes the speed
+                });
             </script>
 
 
