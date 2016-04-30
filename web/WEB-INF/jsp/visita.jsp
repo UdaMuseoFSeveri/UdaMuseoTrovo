@@ -65,63 +65,23 @@
                         <th>Prezzo</th>
                         <th>Validit&agrave;</th>
                     </tr>
-                    <tr id="b1">
-                        <td id="b-numB1"></td>
-                        <td id="b-titolo1">${visita.titolo}</td>
-                        <td id="b-categoria1">
-                            <select id="categorie1" name="cat">
+                    <tr id="b1"><td id="b-numB1"></td><td id="b-titolo1">${visita.titolo}</td><td id="b-categoria1">
+                            <select class="categorie" onchange="changePrice(event)" name="cat">
                                 <c:forEach items="${categorie}" var="categoria">
                                     <option value="${categoria.sconto}">${categoria.titolo}</option>
                                 </c:forEach>
-                            </select>
-                        </td>
-                        <td id="b-price1">
+                            </select></td><td id="b-price1">
                             ${visita.tariffa}
-                        </td>
-                        <td id="b-validita1">
+                        </td><td id="b-validita1">
                             <%
                             if(v.getTipo() == 'E') out.print(v.getDataFine());
                             
                             %>
-                        </td>
-                    
-                    </tr>
+                        </td></tr>
                     
                 </table>
                         <button id="add" class="btn btn-info glyphicon glyphicon-plus"></button>
             </div>
-            <!-- Related Projects Row -->
-            <!--<div class="row">
-
-                <div class="col-lg-12">
-                    <h3 class="page-header">Related Projects</h3>
-                </div>
-
-                <div class="col-sm-3 col-xs-6">
-                    <a href="#">
-                        <img class="img-responsive img-hover img-related" src="http://placehold.it/500x300" alt="">
-                    </a>
-                </div>
-
-                <div class="col-sm-3 col-xs-6">
-                    <a href="#">
-                        <img class="img-responsive img-hover img-related" src="http://placehold.it/500x300" alt="">
-                    </a>
-                </div>
-
-                <div class="col-sm-3 col-xs-6">
-                    <a href="#">
-                        <img class="img-responsive img-hover img-related" src="http://placehold.it/500x300" alt="">
-                    </a>
-                </div>
-
-                <div class="col-sm-3 col-xs-6">
-                    <a href="#">
-                        <img class="img-responsive img-hover img-related" src="http://placehold.it/500x300" alt="">
-                    </a>
-                </div>
-
-            </div>-->
             <!-- /.row -->
 
             <hr>
