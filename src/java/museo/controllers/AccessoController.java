@@ -18,7 +18,7 @@ public class AccessoController {
 
     private Database db = new Database();
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(ModelMap map, @RequestParam(value = "utente", required = false) String nomeUtente, @RequestParam(value = "password", required = false) String password) {
         if(nomeUtente != null && password != null ){
             int i;
@@ -48,29 +48,30 @@ public class AccessoController {
 
     @RequestMapping(value = "/verificaLogin", method = RequestMethod.POST)
     public String verificaLogin(ModelMap map, @RequestParam(value = "utente", required = true) String nomeUtente, @RequestParam(value = "password", required = true) String password) {
-        int i;
-        i = db.verificaUtente(new Utente(nomeUtente, password));
-       /**
-        String s= ""+i;
-        map.put("risposta",s);
-        map.put("utente",nomeUtente);
-        **/
-        
-        if (i == 1) {
-            map.put("risposta","Il nome utente è inesistente");
-            return "login";
+        if(nomeUtente != null && password != null ){
+            int i;
+            i = db.verificaUtente(new Utente(nomeUtente, password));
+           /**
+            String s= ""+i;
+            map.put("risposta",s);
+            map.put("utente",nomeUtente);
+            **/
 
+            if (i == 1) {
+                map.put("risposta","Il nome utente è inesistente");
+
+            }
+            else if (i == 0) {
+                //login affettuato correttamente
+               map.put("username",nomeUtente);
+               map.put("accesso",true);
+            }else{
+               map.put("risposta","La password è errata");
+               return "login";
+
+            }
         }
-        else if (i == 0) {
-           map.put("username",nomeUtente);
-           map.put("password",password);
-           return "accessoEffettuato";
-
-        }else{
-           map.put("risposta","La password è errata");
-           return "login";
-
-        }
+        return "login";
         
 
     }
@@ -80,12 +81,20 @@ public class AccessoController {
         if (0 == db.utenteEsistente(nomeUtente)) {
             if (password.equals(verificaPassword)) {
                 db.salvaUtente(new Utente(nomeUtente, password));
-                return "homepage";
+                return "login";
             } else {
-                return "login?errorPass=true";
+                map.put("risposta","La password non coincide");
             }
         } else {
-            return "login?dupplicate=true";
+            map.put("risposta","Nome utente già esistente");
         }
+        return "login";
+                
+    }
+
+     @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(ModelMap map) {
+        return "logout";
     }
 }
+
