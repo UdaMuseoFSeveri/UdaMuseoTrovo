@@ -22,7 +22,8 @@ public class AccessoController {
     public String loginPage(ModelMap map, @RequestParam(value = "utente", required = false) String nomeUtente, @RequestParam(value = "password", required = false) String password) {
         if(nomeUtente != null && password != null ){
             int i;
-            i = db.verificaUtente(new Utente(nomeUtente, password));
+            String passwordCifrata=db.cifraPassword(password);
+            i = db.verificaUtente(new Utente(nomeUtente, passwordCifrata));
            /**
             String s= ""+i;
             map.put("risposta",s);
@@ -48,9 +49,11 @@ public class AccessoController {
 
     @RequestMapping(value = "/verificaLogin", method = RequestMethod.POST)
     public String verificaLogin(ModelMap map, @RequestParam(value = "utente", required = true) String nomeUtente, @RequestParam(value = "password", required = true) String password) {
-        if(nomeUtente != null && password != null ){
+        String passwordCifrata=db.cifraPassword(password);
+        
+        if(nomeUtente != null && passwordCifrata != null ){
             int i;
-            i = db.verificaUtente(new Utente(nomeUtente, password));
+            i = db.verificaUtente(new Utente(nomeUtente, passwordCifrata));
            /**
             String s= ""+i;
             map.put("risposta",s);
@@ -78,9 +81,12 @@ public class AccessoController {
 
     @RequestMapping(value = "/registra", method = RequestMethod.POST)
     public String registra(ModelMap map, @RequestParam(value = "utente", required = true) String nomeUtente, @RequestParam(value = "password", required = true) String password, @RequestParam(value = "verificaPassword", required = true) String verificaPassword) {
+        String pass=db.cifraPassword(password);
+        String verPassword=db.cifraPassword(verificaPassword);
+        
         if (0 == db.utenteEsistente(nomeUtente)) {
-            if (password.equals(verificaPassword)) {
-                db.salvaUtente(new Utente(nomeUtente, password));
+            if (pass.equals(verPassword)) {
+                db.salvaUtente(new Utente(nomeUtente, pass));
                 return "login";
             } else {
                 map.put("risposta","La password non coincide");
