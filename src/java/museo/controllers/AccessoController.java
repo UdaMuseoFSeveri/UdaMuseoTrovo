@@ -20,31 +20,7 @@ public class AccessoController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(ModelMap map, @RequestParam(value = "utente", required = false) String nomeUtente, @RequestParam(value = "password", required = false) String password) {
-        if(nomeUtente != null && password != null ){
-            int i;
-            String passwordCifrata=db.cifraPassword(password);
-            i = db.verificaUtente(new Utente(nomeUtente, passwordCifrata));
-           /**
-            String s= ""+i;
-            map.put("risposta",s);
-            map.put("utente",nomeUtente);
-            **/
-
-            if (i == 1) {
-                map.put("risposta","Il nome utente è inesistente");
-
-            }
-            else if (i == 0) {
-                //login affettuato correttamente
-               map.put("username",nomeUtente);
-               map.put("accesso",true);
-            }else{
-               map.put("risposta","La password è errata");
-               return "login";
-
-            }
-        }
-        return "login";
+                return "login";
     }
 
     @RequestMapping(value = "/verificaLogin", method = RequestMethod.POST)
