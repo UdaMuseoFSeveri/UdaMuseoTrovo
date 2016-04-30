@@ -51,12 +51,12 @@
                                 <div class="col-lg-12">
                                     <c:if test="${risposta!=null}">
                                         <div style="color:red;text-align:center"><b>${risposta}</b></div> </br>
-                                    </c:if>
-                                        <c:if test="${username!=null}">
-                                            <jsp:setProperty name="user" property="nomeUtente" value="${username}"></jsp:setProperty>
-                                            <c:redirect url="./homepage"/>
-                                        </c:if>
-                                    <form id="login-form" action="./login" method="post" role="form" style="display: block;">
+                                            </c:if>
+                                            <c:if test="${username!=null}">
+                                                <jsp:setProperty name="user" property="nomeUtente" value="${username}"></jsp:setProperty>
+                                                <c:redirect url="./homepage"/>
+                                            </c:if>
+                                    <form id="login-form" action="./verificaLogin" method="post" role="form" style="display: block;">
                                         <div class="form-group">
                                             <input name="utente" id="username" tabindex="1" class="form-control" placeholder="Username" value="" type="text">
                                         </div>
@@ -71,30 +71,19 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <div class="text-center">
-                                                        <a href="http://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
                                     </form>
 
 
+                                    <form id="register-form" action="./registra" method="post" role="form" style="display: none;">
 
-                                    <form id="register-form" action="./login" method="post" role="form" style="display: none;">
-                                        
                                         <div class="form-group">
-                                            <input name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="" type="text">
+                                            <input name="utente" id="username" tabindex="1" class="form-control" placeholder="Username" value="" type="text">
                                         </div>
                                         <div class="form-group">
                                             <input name="password" id="password" tabindex="2" class="form-control" placeholder="Password" type="password">
                                         </div>
                                         <div class="form-group">
-                                            <input name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password" type="password">
+                                            <input name="verificaPassword" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password" type="password">
                                         </div>
                                         <div class="form-group">
                                             <div class="row">
@@ -117,6 +106,6 @@
             <script>
                 $('.carousel').carousel({
                     interval: 5000 //changes the speed
-                })
+                });
             </script>
     </body></html>
