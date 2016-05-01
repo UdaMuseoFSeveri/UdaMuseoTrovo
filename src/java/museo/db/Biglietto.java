@@ -183,9 +183,11 @@ public class Biglietto implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "museo.db.Biglietti[ codiceBiglietto=" + codiceBiglietto + " ]";
-    }
+  @Override
+  public String toString() {
+    return "Biglietto{" + "codiceBiglietto=" + codiceBiglietto + ", dataValidita=" + dataValidita + ", dataPrenotazione=" + dataPrenotazione + ", serviziCollection=" + serviziCollection + ", nomeUtente=" + nomeUtente + ", codiceCategoria=" + codiceCategoria + ", codiceVisita=" + codiceVisita + '}';
+  }
+
+
 
 }

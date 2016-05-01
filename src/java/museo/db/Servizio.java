@@ -31,7 +31,12 @@ import javax.xml.bind.annotation.XmlTransient;
         @NamedQuery(  
             name = "getServizi",  
             query = "FROM Servizio"  
-        ) 
+        ),
+      @NamedQuery(  
+            name = "getServizioById",  
+            query = "FROM Servizio where codiceServizio=:servizio"  
+        )
+      
 
     }
 )

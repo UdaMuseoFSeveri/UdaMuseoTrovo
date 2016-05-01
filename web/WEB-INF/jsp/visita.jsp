@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:useBean id="user" class="museo.db.Utente" scope="session" />
 <!DOCTYPE html>
 <html lang="en">
     <!-- Navigation -->
@@ -7,7 +8,7 @@
         <title>Servizi</title>
         <link href="./resources/css/visita.css" rel="stylesheet">
         <script src="./resources/js/jquery.js"></script>
-        <script src="./resources/js/prenotazione_biglietto.js"></script>
+        <script src="./resources/js/biglietto.js"></script>
     </head>
     <body>     
         <jsp:include page="menu.jsp"/>
@@ -28,63 +29,128 @@
             <div class="row">
 
                 <div class="col-md-8" >
-                        <img style="height: 400px; width: 800px;" class="img-responsive img-related" src="${visita.getImmagineCopertina()}" alt="${visita.getTitolo()}">
+                    <img style="height: 400px; width: 800px;" class="img-responsive img-related" src="${visita.getImmagineCopertina()}" alt="${visita.getTitolo()}">
                 </div>
 
                 <div class="col-md-4">
                     <h3>Descrizione</h3>
                     <p>${visita.getDescrizione()}</p>
-                    <% 
-                    Visita v = (Visita) request.getAttribute("visita");
-                    if(v.getTipo() == 'E'){
-                    %>
-                        <h3>Date</h3>
-                        <ul>
-                            <li>Inizio evento: ${visita.getDataInizio()}</li>
-                            <li>Fine evento: ${visita.getDataFine()}</li>
-                        </ul>
                     <%
-                    }
+                      Visita v = (Visita) request.getAttribute("visita");
+                      if (v.getTipo() == 'E') {
+                    %>
+                    <h3>Date</h3>
+                    <ul>
+                        <li>Inizio evento: ${visita.getDataInizio()}</li>
+                        <li>Fine evento: ${visita.getDataFine()}</li>
+                    </ul>
+                    <%
+                      }
                     %>
                     <h3>Prezzo</h3>
                     <p id="prezzo">${visita.tariffa} &euro;</p>
-                    <button id="add-biglietti" class="btn btn-primary">Acquista Biglietti</button>
+                    <%
+                      String nome = user.getNomeUtente();
+                      if (nome == null) {
+                    %>
+                    <a  href="./login"><button title="Esegui il login per acquistare i biblietti" class="btn btn-primary">Acquista Biglietti</button></a>
+
+                    <%
+                      } else {
+                        out.print("<button id='add-biglietti' class='btn btn-primary'>Acquista Biglietti</button>");
+                      }
+                    %>
                 </div>
 
             </div>
             <!-- /.row -->
-            <div class="row invis" id="prenota-biblietto">
-                <div class="col-lg-12">
-                    <h2>Prenota i tuoi biglietti</h2>
-                </div><br/><br/><br/>
-                <table id="biglietti" class="table">
-                    <tr>
-                        <th>Biglietto numero</th>
-                        <th>Visita</th>
-                        <th>Categoria</th>
-                        <th>Prezzo</th>
-                        <th>Validit&agrave;</th>
-                    </tr>
-                    <tr id="b1"><td id="b-numB1"></td><td id="b-titolo1">${visita.titolo}</td><td id="b-categoria1">
-                            <select class="categorie" onchange="changePrice(event)" name="cat">
-                                <c:forEach items="${categorie}" var="categoria">
-                                    <option value="${categoria.sconto}">${categoria.titolo}</option>
+            <c:if test="${user.getNomeUtente() != null}" >
+                <%--<div class="row invis" id="prenota-biblietto">
+                    <div class="col-lg-12">
+                        <h2>Prenota i tuoi biglietti</h2>
+                    </div><br/><br/><br/>
+                    <table id="biglietti" class="table">
+                        <tr>
+                            <th>Biglietto numero</th>
+                            <th>Visita</th>
+                            <th>Categoria</th>
+                            <th>Prezzo</th>
+                            <th>Validit&agrave;</th>
+                            <th>Servizi</th>
+                        </tr>
+                        <tr id="b1"><td id="b-numB1"></td>
+                            <td id="b-titolo1">${visita.titolo}</td>
+                            <td id="b-categoria1">
+                                <select class="categorie" onchange="changePrice(event)" name="cat">
+                                    <c:forEach items="${categorie}" var="categoria">
+                                        <option title="${categoria.descrizione}" value="${categoria.sconto}">${categoria.titolo}</option>
+                                    </c:forEach>
+                                </select>
+                            </td>
+                            <td id="b-price1">${visita.tariffa}</td>
+                            <td id="b-validita1"><%if (v.getTipo() == 'E') {
+                                out.print(v.getDataFine());
+                              }%></td>
+                            <td id="b-servizi1">
+                                <c:forEach items="${servizi}" var="servizio">
+                                    <label title="${servizio.descrizione}"><input class="servizi" onclick="aggiornaPrezzo(event,${servizio.prezzo})" type="checkbox" name="${servizio.titolo}" value="${servizio.prezzo}" /> ${servizio.titolo}</label>
+                                    <br /> 
                                 </c:forEach>
-                            </select></td><td id="b-price1">
-                            ${visita.tariffa}
-                        </td><td id="b-validita1">
-                            <%
-                            if(v.getTipo() == 'E') out.print(v.getDataFine());
-                            
-                            %>
-                        </td></tr>
-                    
-                </table>
-                        <button id="add" class="btn btn-info glyphicon glyphicon-plus"></button>
-            </div>
-            <!-- /.row -->
 
-            <hr>
+
+                            </td>
+                        </tr>
+                    </table>
+                    <button id="add" class="btn btn-info glyphicon glyphicon-plus"></button>
+                </div>--%>
+                <div id="prenota-biblietto" class="row invis">
+                    <form action="./addBiglietto" id="inputBiglietto" method="get">
+                        <div class="col-lg-12">
+                            <h2>Prenota i tuoi biglietti</h2>
+                        </div><br/><br/><br/>
+                        <table id="biglietti" class="table">
+                            <tr>
+                                <th>Categoria</th>
+                                <th>Prezzo</th>
+                                <th>Validit&agrave;</th>
+                                <th>Servizi</th>
+                            </tr>
+                            <tr id="b1">
+                                <td id="categoria">
+                                    <select class="categorie">
+                                        <c:forEach items="${categorie}" var="categoria">
+                                            <option class="categoria" title="${categoria.descrizione}" data-codice="${categoria.codiceCategoria}" value="${categoria.sconto}">${categoria.titolo}</option>
+                                        </c:forEach>
+                                    </select>
+                                </td>
+                                <td id="price">${visita.tariffa}</td>
+                                <td id="validita"><%if (v.getTipo() == 'E') {
+                                    out.print(v.getDataFine());
+                                  }%></td>
+                                <td id="servizi">
+                                    <c:forEach items="${servizi}" var="servizio">
+                                        <label title="${servizio.descrizione}"><input class="servizi" data-codice="${servizio.codiceServizio}" type="checkbox" name="${servizio.titolo}" value="${servizio.prezzo}" /> ${servizio.titolo}</label>
+                                        <br /> 
+                                    </c:forEach>
+                                </td>
+                            </tr>
+                        </table>
+                        
+                        <input name="dataValidita" type="date" value="<%if (v.getTipo() == 'E') {
+                                    out.print(v.getDataFine());
+                                  }%>" />
+                        <input name="codiceVisita" value="${visita.codiceVisita}" type="hidden" />
+                        <input name="nomeUtente" type="hidden" value="${user.getNomeUtente()}" />
+                        <input id="i-categoria" name="categoria" type="hidden" value="1" />
+                        <button type="submit" class="btn btn-info">Invia</button>
+
+                    </form>
+                </div>
+            </div>
+        </c:if>
+        <!-- /.row -->
+
+        <hr>
 
         <!-- /.container -->
 

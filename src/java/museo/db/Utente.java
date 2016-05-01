@@ -24,20 +24,22 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author FSEVERI\magro3026
  */
+@NamedQueries(
+        {
+          @NamedQuery(
+                  name = "checkPassword",
+                  query = "SELECT U.password FROM Utente U WHERE U.nomeUtente= :nome_Utente"
+          ),
+          @NamedQuery(
+                  name = "checkUtente",
+                  query = "SELECT U.nomeUtente FROM Utente U WHERE U.nomeUtente= :utente "
+          ),
+          @NamedQuery(
+                  name = "getUtenteByNome",
+                  query = "FROM Utente U WHERE U.nomeUtente= :nome "
+          )
 
-
-@NamedQueries(  
-    {  
-        @NamedQuery(  
-            name = "checkPassword",  
-            query = "SELECT U.password FROM Utente U WHERE U.nomeUtente= :nome_Utente"  
-        ),
-        @NamedQuery(  
-            name = "checkUtente",  
-            query = "SELECT U.nomeUtente FROM Utente U WHERE U.nomeUtente= :utente "  
-        ) 
-
-    }
+        }
 )
 @Entity
 @Table(name = "Utenti")
@@ -47,77 +49,78 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Utenti.findByNomeUtente", query = "SELECT u FROM Utenti u WHERE u.nomeUtente = :nomeUtente"),
     @NamedQuery(name = "Utenti.findByPassword", query = "SELECT u FROM Utenti u WHERE u.password = :password")})*/
 public class Utente implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @Column(name = "NomeUtente")
-    private String nomeUtente;
-    @Basic(optional = false)
-    @Column(name = "Password")
-    private String password;
-    @OneToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "nomeUtente")
-    private Collection<Biglietto> bigliettiCollection;
 
-    public Utente() {
-    }
+  private static final long serialVersionUID = 1L;
+  @Id
+  @Basic(optional = false)
+  @Column(name = "NomeUtente")
+  private String nomeUtente;
+  @Basic(optional = false)
+  @Column(name = "Password")
+  private String password;
+  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "nomeUtente")
+  private Collection<Biglietto> bigliettiCollection;
 
-    public Utente(String nomeUtente) {
-        this.nomeUtente = nomeUtente;
-    }
+  public Utente() {
+  }
 
-    public Utente(String nomeUtente, String password) {
-        this.nomeUtente = nomeUtente;
-        this.password = password;
-    }
+  public Utente(String nomeUtente) {
+    this.nomeUtente = nomeUtente;
+  }
 
-    public String getNomeUtente() {
-        return nomeUtente;
-    }
+  public Utente(String nomeUtente, String password) {
+    this.nomeUtente = nomeUtente;
+    this.password = password;
+  }
 
-    public void setNomeUtente(String nomeUtente) {
-        this.nomeUtente = nomeUtente;
-    }
+  public String getNomeUtente() {
+    return nomeUtente;
+  }
 
-    public String getPassword() {
-        return password;
-    }
+  public void setNomeUtente(String nomeUtente) {
+    this.nomeUtente = nomeUtente;
+  }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+  public String getPassword() {
+    return password;
+  }
 
-    @XmlTransient
-    public Collection<Biglietto> getBigliettiCollection() {
-        return bigliettiCollection;
-    }
+  public void setPassword(String password) {
+    this.password = password;
+  }
 
-    public void setBigliettiCollection(Collection<Biglietto> bigliettiCollection) {
-        this.bigliettiCollection = bigliettiCollection;
-    }
+  @XmlTransient
+  public Collection<Biglietto> getBigliettiCollection() {
+    return bigliettiCollection;
+  }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (nomeUtente != null ? nomeUtente.hashCode() : 0);
-        return hash;
-    }
+  public void setBigliettiCollection(Collection<Biglietto> bigliettiCollection) {
+    this.bigliettiCollection = bigliettiCollection;
+  }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Utente)) {
-            return false;
-        }
-        Utente other = (Utente) object;
-        if ((this.nomeUtente == null && other.nomeUtente != null) || (this.nomeUtente != null && !this.nomeUtente.equals(other.nomeUtente))) {
-            return false;
-        }
-        return true;
-    }
+  @Override
+  public int hashCode() {
+    int hash = 0;
+    hash += (nomeUtente != null ? nomeUtente.hashCode() : 0);
+    return hash;
+  }
 
-    @Override
-    public String toString() {
-        return "museo.db.Utenti[ nomeUtente=" + nomeUtente + " ]";
+  @Override
+  public boolean equals(Object object) {
+    // TODO: Warning - this method won't work in the case the id fields are not set
+    if (!(object instanceof Utente)) {
+      return false;
     }
-    
+    Utente other = (Utente) object;
+    if ((this.nomeUtente == null && other.nomeUtente != null) || (this.nomeUtente != null && !this.nomeUtente.equals(other.nomeUtente))) {
+      return false;
+    }
+    return true;
+  }
+
+  @Override
+  public String toString() {
+    return "museo.db.Utenti[ nomeUtente=" + nomeUtente + " ]";
+  }
+
 }

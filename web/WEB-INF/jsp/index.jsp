@@ -5,7 +5,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <head>
         <jsp:include page="head.jsp"/>
-        <title>Servizi</title>
+        <title>Homepage - Biglietteria Museo</title>
     </head>
     <body>     
         <jsp:include page="menu.jsp"/>

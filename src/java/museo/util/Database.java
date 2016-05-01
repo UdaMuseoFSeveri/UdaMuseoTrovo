@@ -310,4 +310,67 @@ public class Database {
         System.out.println(generatedPassword);
         return (generatedPassword);
     }
+    
+    public Categoria getCategoriaById(int id) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Query q = session.getNamedQuery("getCategoriaById");
+            q.setParameter("codice_Categoria", id);
+            if (q.list().size() > 0) {
+                return (Categoria) q.list().get(0);
+            }
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
+    
+    public Utente getUtenteByNome(String nome) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Query q = session.getNamedQuery("getUtenteByNome");
+            q.setParameter("nome", nome);
+            if (q.list().size() > 0) {
+                return (Utente) q.list().get(0);
+            }
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
+    
+    public Servizio getServizioById(int id) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Query q = session.getNamedQuery("getServizioById");
+            q.setParameter("servizio", id);
+            if (q.list().size() > 0) {
+                return (Servizio) q.list().get(0);
+            }
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
 }
