@@ -373,4 +373,10 @@ public class Database {
         }
         return null;
     }
+    
+    public Date dataFine(Date dataInizio){
+        long d = dataInizio.getTime();
+        d+=86400000;
+        return new Date (d);
+    }
 }
