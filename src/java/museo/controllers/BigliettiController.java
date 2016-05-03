@@ -41,6 +41,7 @@ public class BigliettiController {
           db.salvaBiglietto(b);
         }
         status.setComplete();
+        
         return "comprati_biglietti";
         
     }
