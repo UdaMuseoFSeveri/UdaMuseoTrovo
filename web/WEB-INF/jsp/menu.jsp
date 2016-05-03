@@ -45,10 +45,10 @@
                     } else {
                     %>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown">${user.nomeUtente}<b class="caret"></b></a>
+                    <a class="dropdown-toggle" data-toggle="dropdown"href="#">${user.nomeUtente}<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="./visite">Visualizza Ordini</a>
+                            <a href="./visualizzaOrdini">Visualizza Ordini</a>
                         </li>
                         <li>
                             <a href="./logout">Logout</a>
