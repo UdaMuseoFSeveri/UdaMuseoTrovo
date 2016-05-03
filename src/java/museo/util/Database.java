@@ -270,8 +270,8 @@ public class Database {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Query query = session.getNamedQuery("getBigliettiForReview");
-            query.setParameter("nome_Utente", nomeUtente);
+            Query query = session.createSQLQuery("SELECT * FROM Biglietti WHERE NomeUtente= ? ORDER BY DataPrenotazione").addEntity(Biglietto.class);
+            query.setParameter(0, nomeUtente);
             if (query.list().size() > 0) {
                 List<Biglietto> risultati = query.list();
                 return risultati;
@@ -310,7 +310,7 @@ public class Database {
         System.out.println(generatedPassword);
         return (generatedPassword);
     }
-    
+
     public Categoria getCategoriaById(int id) {
         Session session = factory.openSession();
         Transaction tx = null;
@@ -331,7 +331,7 @@ public class Database {
         }
         return null;
     }
-    
+
     public Utente getUtenteByNome(String nome) {
         Session session = factory.openSession();
         Transaction tx = null;
@@ -352,7 +352,7 @@ public class Database {
         }
         return null;
     }
-    
+
     public Servizio getServizioById(int id) {
         Session session = factory.openSession();
         Transaction tx = null;

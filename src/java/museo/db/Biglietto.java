@@ -36,12 +36,12 @@ import javax.xml.bind.annotation.XmlTransient;
                     name = "getBiglietti",
                     query = "FROM Biglietto B WHERE B.nomeUtente= :nome_Utente AND B.dataPrenotazione= :data_Prenotazione"
             ),
-
+/**
             @NamedQuery(
                     name = "getBigliettiForReview",
                     query = "FROM Biglietto B WHERE B.nomeUtente= :nome_Utente GROUP BY B.dataPrenotazione"
             ),
-            
+        */    
             @NamedQuery(
                     name = "getNBigliettiEspozioni",
                     query = "SELECT COUNT(*) FROM Biglietto B,Visita V WHERE B.codiceVisita = V.codiceVisita AND V.tipo='E'  AND  B.codiceVisita = :codice_Visita"
