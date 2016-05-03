@@ -13,6 +13,7 @@
     <body>     
         <jsp:include page="menu.jsp"/>
         <%@ page import="museo.db.Visita" %>
+        <%@ page import="java.sql.Date" %>
 
         <!-- Page Content -->
         <div class="container">
@@ -60,49 +61,14 @@
                         out.print("<button id='add-biglietti' class='btn btn-primary'>Acquista Biglietti</button>");
                       }
                     %>
+                    <h3>Info Visita:</h3>
+                    <p>Numero di biglietti prenotati per questa esposizione: ${num_biglietti}</p>
+                    <p>Ricavo vendita biglietti : ${soldi_biglietti} &euro;</p>
                 </div>
 
             </div>
             <!-- /.row -->
             <c:if test="${user.getNomeUtente() != null}" >
-                <%--<div class="row invis" id="prenota-biblietto">
-                    <div class="col-lg-12">
-                        <h2>Prenota i tuoi biglietti</h2>
-                    </div><br/><br/><br/>
-                    <table id="biglietti" class="table">
-                        <tr>
-                            <th>Biglietto numero</th>
-                            <th>Visita</th>
-                            <th>Categoria</th>
-                            <th>Prezzo</th>
-                            <th>Validit&agrave;</th>
-                            <th>Servizi</th>
-                        </tr>
-                        <tr id="b1"><td id="b-numB1"></td>
-                            <td id="b-titolo1">${visita.titolo}</td>
-                            <td id="b-categoria1">
-                                <select class="categorie" onchange="changePrice(event)" name="cat">
-                                    <c:forEach items="${categorie}" var="categoria">
-                                        <option title="${categoria.descrizione}" value="${categoria.sconto}">${categoria.titolo}</option>
-                                    </c:forEach>
-                                </select>
-                            </td>
-                            <td id="b-price1">${visita.tariffa}</td>
-                            <td id="b-validita1"><%if (v.getTipo() == 'E') {
-                                out.print(v.getDataFine());
-                              }%></td>
-                            <td id="b-servizi1">
-                                <c:forEach items="${servizi}" var="servizio">
-                                    <label title="${servizio.descrizione}"><input class="servizi" onclick="aggiornaPrezzo(event,${servizio.prezzo})" type="checkbox" name="${servizio.titolo}" value="${servizio.prezzo}" /> ${servizio.titolo}</label>
-                                    <br /> 
-                                </c:forEach>
-
-
-                            </td>
-                        </tr>
-                    </table>
-                    <button id="add" class="btn btn-info glyphicon glyphicon-plus"></button>
-                </div>--%>
                 <div id="prenota-biblietto" class="row invis">
                     <form action="./addBiglietto" id="inputBiglietto" method="get">
                         <div class="col-lg-12">
@@ -126,7 +92,10 @@
                                 <td id="price">${visita.tariffa}</td>
                                 <td id="validita"><%if (v.getTipo() == 'E') {
                                     out.print(v.getDataFine());
-                                  }%></td>
+                                  }
+                                else{
+                                    out.print((Date) request.getAttribute("dataFine"));
+                                }%></td>
                                 <td id="servizi">
                                     <c:forEach items="${servizi}" var="servizio">
                                         <label title="${servizio.descrizione}"><input class="servizi" data-codice="${servizio.codiceServizio}" type="checkbox" name="${servizio.titolo}" value="${servizio.prezzo}" /> ${servizio.titolo}</label>
@@ -136,9 +105,13 @@
                             </tr>
                         </table>
                         
-                        <input name="dataValidita" type="date" value="<%if (v.getTipo() == 'E') {
+                        <input name="dataValidita" class="invis" type="date" value="<%if (v.getTipo() == 'E') {
                                     out.print(v.getDataFine());
-                                  }%>" />
+                                  }
+                               else {
+                                   out.print((Date) request.getAttribute("dataFine"));
+                               }
+                               %>" />
                         <input name="codiceVisita" value="${visita.codiceVisita}" type="hidden" />
                         <input name="nomeUtente" type="hidden" value="${user.getNomeUtente()}" />
                         <input id="i-categoria" name="categoria" type="hidden" value="1" />
@@ -146,7 +119,6 @@
 
                     </form>
                 </div>
-            </div>
         </c:if>
         <!-- /.row -->
 

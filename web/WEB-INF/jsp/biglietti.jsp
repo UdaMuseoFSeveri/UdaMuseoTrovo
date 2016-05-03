@@ -17,24 +17,31 @@
                 </div>
             </div>
             <div class="row">
-                <c:forEach items="${tikets}" var="biglietto">
-                    <div class="col-lg-12">
-                        <div class="panel-body">
-                            <p>Data di validit&agrave;: ${biglietto.getDataValidita()}</p>
-                            <p>Prenotato da: ${biglietto.getNomeUtente().nomeUtente}</p>
-                            <p>Categoria biglietto: ${biglietto.codiceCategoria.titolo}</p>
-                            Servizi: <ul>
-                                <c:forEach items="${biglietto.getServiziCollection()}" var="servizio">
-                                    <li>${servizio.titolo}: ${servizio.prezzo}</li>
+                <div class="col-lg-12">
+                    <c:forEach items="${tikets}" var="biglietto">
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><h3 class="panel-title">${biglietto.codiceVisita.titolo}</h3></div>
+                            <div class="panel-body">
+                                
+                                <p>Data di validit&agrave;: ${biglietto.getDataValidita()}</p>
+                                <p>Prenotato da: ${biglietto.getNomeUtente().nomeUtente}</p>
+                                <p>Categoria biglietto: ${biglietto.codiceCategoria.titolo}</p>
+                                Servizi: <ul>
+                                    <c:forEach items="${biglietto.getServiziCollection()}" var="servizio">
+                                        <li>${servizio.titolo}: ${servizio.prezzo}</li>
 
-                                </c:forEach>
-                            </ul>
+                                    </c:forEach>
+                                </ul>
+
+                            </div>
                         </div>
-                    </div>
-                </c:forEach>
-                <a href='./visite' ><button>Continua ad acquistare</button></a>
-                <a href='./acquista' ><button>Completa l'acquisto</button></a>
-                <a href='./svuotaCarrello' ><button>Svuota il carrello</button></a>
+                            
+                    </c:forEach>
+                
+                    <a href='./visite' ><button class="btn btn-primary">Continua ad acquistare</button></a>
+                <a href='./acquista' ><button class="btn btn-success">Completa l'acquisto</button></a>
+                <a href='./svuotaCarrello' ><button class="btn btn-danger">Svuota il carrello</button></a>
+                </div>
             </div>
 
             <jsp:include page="footer.jsp"/>

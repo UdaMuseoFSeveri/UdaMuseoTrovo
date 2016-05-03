@@ -376,7 +376,9 @@ public class Database {
     
     public Date dataFine(Date dataInizio){
         long d = dataInizio.getTime();
-        d+=86400000;
+        System.out.println("data inizio: "+d);
+        d+=2678400000L;
+        System.out.println("data fine: "+d);
         return new Date (d);
     }
 }

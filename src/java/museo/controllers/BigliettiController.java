@@ -41,7 +41,7 @@ public class BigliettiController {
           db.salvaBiglietto(b);
         }
         status.setComplete();
-        return "biglietti";
+        return "comprati_biglietti";
         
     }
     @RequestMapping(value="/svuotaCarrello",method=RequestMethod.GET)

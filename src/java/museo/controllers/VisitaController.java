@@ -40,24 +40,29 @@ public class VisitaController {
     if (!map.containsAttribute("carrello")) {
       map.addAttribute("carrello", new ArrayList<Biglietto>());
     }
-
-    map.put("visita", db.getEventoById(id));
+    Visita v = db.getEventoById(id);
+    if(v.getTipo() != 'E')  {
+        Date datafine = db.dataFine(new Date(System.currentTimeMillis()));
+        map.put("dataFine",datafine);
+    }
+    map.put("visita", v);
     map.put("categorie", db.getCategorie());
     map.put("servizi", db.getServizi());
+    map.put("num_biglietti",db.getNBigliettiEspozioni(id));
+    map.put("soldi_biglietti", db.getRicavoEsposizioni(id));
+    
     return "visita";
   }
 
   @RequestMapping(value = "/addBiglietto", method = RequestMethod.GET)
   public String aggiungiBigletto(ModelMap map, @RequestParam(value = "dataValidita", required = true) Date dataValidita, @RequestParam(value = "codiceVisita") int visita, @RequestParam(value = "servizi", required = false) List<Integer> servizi,/*@ModelAttribute List<Servizio> servizi, */
           @RequestParam(value = "nomeUtente", required = true) String nomeUtente, @RequestParam(value = "categoria", required = true) int codiceCategoria, @ModelAttribute("carrello") List<Biglietto> carrello) {
-    System.out.println("Sono dentro!");
     Collection<Servizio> serv = new ArrayList<>();
     Biglietto biglietto = new Biglietto();
     biglietto.setCodiceVisita(db.getEventoById(visita));
     biglietto.setDataValidita(dataValidita);
     biglietto.setCodiceCategoria(db.getCategoriaById(codiceCategoria));
     biglietto.setNomeUtente(db.getUtenteByNome(nomeUtente));
-    //biglietto.setDataPrenotazione(new Timestamp(System.currentTimeMillis()));
     if (servizi != null) {
       for (Integer i : servizi) {
         serv.add(db.getServizioById(i));
