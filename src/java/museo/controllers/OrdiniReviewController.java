@@ -29,7 +29,7 @@ public class OrdiniReviewController {
     
     @RequestMapping(value="/visualizzaOrdini")
     public String visualizzaOrdini(ModelMap map,@ModelAttribute("user")Utente nomeUtente){
-        map.put("visualizzaOrdini",db.getBigliettiForReview(nomeUtente.getNomeUtente()));
+        map.put("ordini",db.getBigliettiForReview(nomeUtente.getNomeUtente()));
         return "visualizzaOrdini";
     }
 }

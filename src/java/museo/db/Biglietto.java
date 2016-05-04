@@ -9,8 +9,10 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -78,10 +80,12 @@ public class Biglietto implements Serializable {
     @Column(name = "DataPrenotazione")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataPrenotazione;
+    
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(name = "Aggiunta", joinColumns = {
         @JoinColumn(name = "CodiceBiglietto", referencedColumnName = "CodiceBiglietto")}, inverseJoinColumns = {
         @JoinColumn(name = "CodiceServizio", referencedColumnName = "CodiceServizio")})
-    @ManyToMany
+    
     private Collection<Servizio> serviziCollection;
     @JoinColumn(name = "NomeUtente", referencedColumnName = "NomeUtente")
     @ManyToOne(optional = false)
@@ -130,7 +134,7 @@ public class Biglietto implements Serializable {
         this.dataPrenotazione = dataPrenotazione;
     }
 
-    @XmlTransient
+    //@XmlTransient
     public Collection<Servizio> getServiziCollection() {
         return serviziCollection;
     }

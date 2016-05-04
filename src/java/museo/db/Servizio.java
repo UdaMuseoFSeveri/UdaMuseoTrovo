@@ -127,7 +127,7 @@ public class Servizio implements Serializable {
         this.immagine = immagine;
     }
 
-    @XmlTransient
+    //@XmlTransient
     public Collection<Biglietto> getBigliettiCollection() {
         return bigliettiCollection;
     }
