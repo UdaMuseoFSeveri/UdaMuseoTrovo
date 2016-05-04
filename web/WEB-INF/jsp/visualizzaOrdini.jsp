@@ -28,15 +28,32 @@
 
             <!-- Portfolio Item Row -->
             <div class="row">
-                <c:forEach items="${visualizzaOrdini}" var="ordini">
-                    <div>
-                        <p>${ordini.getNomeUtente().getNomeUtente()}</p>
-                        <p>${ordini.getCodiceBiglietto()}</p>
-                        <p>${ordini.getDataPrenotazione()}</p>
-                        <p>${ordini.getDataPrenotazione()}</p>
+
+                <c:forEach items="${ordini}" var="ordine">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><h3 class="panel-title">${ordine.codiceVisita.titolo}</h3></div>
+                        <div class="panel-body">
+
+                            <p>Data di validit&agrave;: ${ordine.getDataValidita()}</p>
+                            <p>Prenotato da: ${ordine.getNomeUtente().nomeUtente}</p>
+                            <p>Categoria biglietto: ${ordine.codiceCategoria.titolo}</p>
+                            Servizi: <ul>
+                                <c:forEach items="${ordine.getServiziCollection()}" var="ser">
+                                        <li>${ser.titolo}: ${ser.prezzo} &euro;</li>
+                                    </c:forEach>
+                            </ul>
+
+                        </div>
                     </div>
-                    <hr>
+
                 </c:forEach>
+
+
+
+
+
+
+
 
             </div>
 
