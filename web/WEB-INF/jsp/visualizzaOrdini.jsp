@@ -37,24 +37,16 @@
                             <p>Data di validit&agrave;: ${ordine.getDataValidita()}</p>
                             <p>Prenotato da: ${ordine.getNomeUtente().nomeUtente}</p>
                             <p>Categoria biglietto: ${ordine.codiceCategoria.titolo}</p>
-                            Servizi: <ul>
+                            <c:if test="${!ordine.getServiziCollection().isEmpty()}">
+                                Servizi: <ul>
+                                </c:if>
                                 <c:forEach items="${ordine.getServiziCollection()}" var="ser">
                                         <li>${ser.titolo}: ${ser.prezzo} &euro;</li>
-                                    </c:forEach>
-                            </ul>
-
+                                        </c:forEach>
+                                </ul>
                         </div>
                     </div>
-
                 </c:forEach>
-
-
-
-
-
-
-
-
             </div>
 
             <jsp:include page="footer.jsp"/>
