@@ -7,6 +7,7 @@ package museo.controllers;
 
 import java.util.ArrayList;
 import java.sql.Date;
+import museo.db.Biglietto;
 import museo.db.Visita;
 import museo.util.Database;
 import org.springframework.stereotype.Controller;
@@ -41,6 +42,9 @@ public class VisiteController {
     
     @RequestMapping(value={"","/homepage","/",})
     public String homeMuseo(ModelMap map){
+        if (!map.containsAttribute("carrello")) {
+            map.addAttribute("carrello", new ArrayList<Biglietto>());
+        }
         map.put("visite",esposizioni); 
         map.put("visiteBase",visite_base);
         return "index";
