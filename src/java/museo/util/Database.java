@@ -5,6 +5,8 @@
  */
 package museo.util;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
@@ -105,14 +107,14 @@ public class Database {
         return null;
     }
 
-    public float getRicavoEsposizioni(int codiceVisita) {
+    public BigDecimal getRicavoEsposizioni(int codiceVisita) {
         Transaction tx = null;
         Session session = factory.openSession();
         try {
             tx = session.beginTransaction();
-            Query q = session.createSQLQuery("SELECT SUM(Tariffa-(Tariffa*Sconto/100)) AS RicavoBiglietti FROM Biglietti B, Visite V, Categorie C WHERE B.CodiceVisita=V.CodiceVisita  AND  Tipo='E'   AND  V.CodiceVisita=?  AND  C.CodiceCategoria=B.CodiceCategoria").addEntity(Biglietto.class).addEntity(Visita.class).addEntity(Categoria.class);
+            Query q = session.createSQLQuery("SELECT SUM(Tariffa-(Tariffa*Sconto/100)) AS RicavoBiglietti FROM Biglietti B, Visite V, Categorie C WHERE B.CodiceVisita=V.CodiceVisita  AND  Tipo='E'   AND  V.CodiceVisita=?  AND  C.CodiceCategoria=B.CodiceCategoria"); 
             q.setParameter(0, codiceVisita);
-            return (float) q.list().get(0);
+            return (BigDecimal) q.uniqueResult();
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -121,17 +123,17 @@ public class Database {
         } finally {
             session.close();
         }
-        return 0;
+        return null;
     }
 
-    public int getNBigliettiEspozioni(int codiceVisita) {
+    public BigInteger getNBigliettiEspozioni(int codiceVisita) {
         Transaction tx = null;
         Session session = factory.openSession();
         try {
             tx = session.beginTransaction();
-            Query q = session.createSQLQuery("SELECT COUNT(*) FROM Biglietti B, Visite V WHERE B.CodiceVisita = V.CodiceVisita  AND  V.Tipo='E'  AND  B.CodiceVisita = ?").addEntity(Biglietto.class).addEntity(Visita.class);
+            Query q = session.createSQLQuery("SELECT COUNT(*) FROM Biglietti B, Visite V WHERE B.CodiceVisita = V.CodiceVisita  AND  V.Tipo='E'  AND  B.CodiceVisita = ?");
             q.setParameter(0, codiceVisita);
-            return (int) q.list().get(0);
+            return (BigInteger) q.uniqueResult();
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -140,7 +142,7 @@ public class Database {
         } finally {
             session.close();
         }
-        return 0;
+        return null;
     }
 
     public List<Visita> getVisiteFromDate(Date dataInizio, Date dataFine) {
