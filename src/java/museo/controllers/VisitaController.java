@@ -73,6 +73,6 @@ public class VisitaController {
     //db.salvaBiglietto(biglietto);
     System.out.println(biglietto);
     map.put("tikets", carrello);
-    return "redirect:/bigliettiPrenotati";
+    return "redirect:/carrello";
   }
 }

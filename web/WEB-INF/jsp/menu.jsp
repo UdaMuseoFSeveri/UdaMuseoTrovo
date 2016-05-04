@@ -41,9 +41,12 @@
                     %>
                     <a href="./login">Login</a> 
                 </li>
-                    <%
-                    } else {
-                    %>
+                <%
+                } else {
+                %>
+                <li>
+                    <a href="./carrello"><span class="glyphicon glyphicon-shopping-cart"></span> Carrello</a>
+                </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown"href="#">${user.nomeUtente}<b class="caret"></b></a>
                     <ul class="dropdown-menu">
