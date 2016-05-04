@@ -8,6 +8,7 @@ package museo.util;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import museo.db.*;
 import org.hibernate.*;
@@ -85,12 +86,12 @@ public class Database {
         }
     }
 
-    public List<Biglietto> getBiglietti(Date timestamp, String username) {
+    public List<Biglietto> getBiglietti(Timestamp timestamp, String username) {
         Transaction tx = null;
         Session session = factory.openSession();
         try {
             tx = session.beginTransaction();
-            Query q = session.getNamedQuery("getBigliettiFromDate");
+            Query q = session.getNamedQuery("getBiglietti");
             q.setParameter("nome_Utente", username);
             q.setParameter("data_Prenotazione", timestamp);
             return q.list();
