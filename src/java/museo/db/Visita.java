@@ -63,7 +63,7 @@ public class Visita implements Serializable {
     private String titolo;
     @Basic(optional = false)
     @Column(name = "Tariffa")
-    private long tariffa;
+    private float tariffa;
     @Basic(optional = false)
     @Column(name = "Descrizione")
     private String descrizione;
@@ -112,7 +112,7 @@ public class Visita implements Serializable {
         this.titolo = titolo;
     }
 
-    public long getTariffa() {
+    public float getTariffa() {
         return tariffa;
     }
 

@@ -107,14 +107,16 @@ public class Database {
         return null;
     }
 
-    public BigDecimal getRicavoEsposizioni(int codiceVisita) {
+    public float getRicavoEsposizioni(int codiceVisita) {
         Transaction tx = null;
         Session session = factory.openSession();
         try {
             tx = session.beginTransaction();
             Query q = session.createSQLQuery("SELECT SUM(Tariffa-(Tariffa*Sconto/100)) AS RicavoBiglietti FROM Biglietti B, Visite V, Categorie C WHERE B.CodiceVisita=V.CodiceVisita  AND  Tipo='E'   AND  V.CodiceVisita=?  AND  C.CodiceCategoria=B.CodiceCategoria"); 
             q.setParameter(0, codiceVisita);
-            return (BigDecimal) q.uniqueResult();
+            BigDecimal b1= (BigDecimal) q.uniqueResult();
+            return b1.floatValue();
+            
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -123,17 +125,18 @@ public class Database {
         } finally {
             session.close();
         }
-        return null;
+        return 0;
     }
 
-    public BigInteger getNBigliettiEspozioni(int codiceVisita) {
+    public int getNBigliettiEspozioni(int codiceVisita) {
         Transaction tx = null;
         Session session = factory.openSession();
         try {
             tx = session.beginTransaction();
             Query q = session.createSQLQuery("SELECT COUNT(*) FROM Biglietti B, Visite V WHERE B.CodiceVisita = V.CodiceVisita  AND  V.Tipo='E'  AND  B.CodiceVisita = ?");
             q.setParameter(0, codiceVisita);
-            return (BigInteger) q.uniqueResult();
+            BigInteger b1= (BigInteger) q.uniqueResult();
+            return b1.intValue();
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -142,7 +145,7 @@ public class Database {
         } finally {
             session.close();
         }
-        return null;
+        return 0;
     }
 
     public List<Visita> getVisiteFromDate(Date dataInizio, Date dataFine) {
