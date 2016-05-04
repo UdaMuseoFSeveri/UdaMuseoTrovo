@@ -110,7 +110,7 @@ public class Database {
         Session session = factory.openSession();
         try {
             tx = session.beginTransaction();
-            Query q = session.createSQLQuery("SUM(Tariffa-(Tariffa*Sconto/100)) AS RicavoBiglietti FROM Biglietti B, Visite V, Categorie C WHERE B.CodiceVisita=V.CodiceVisita  AND  Tipo=’E’   AND  V.CodiceVisita=?  AND  C.CodiceCategoria=B.CodiceCategoria");
+            Query q = session.createSQLQuery("SUM(Tariffa-(Tariffa*Sconto/100)) AS RicavoBiglietti FROM Biglietti B, Visite V, Categorie C WHERE B.CodiceVisita=V.CodiceVisita  AND  Tipo=’E’   AND  V.CodiceVisita=?  AND  C.CodiceCategoria=B.CodiceCategoria").addEntity(Biglietto.class).addEntity(Visita.class).addEntity(Categoria.class);
             q.setParameter(0, codiceVisita);
             return (float) q.list().get(0);
         } catch (HibernateException e) {
@@ -129,7 +129,7 @@ public class Database {
         Session session = factory.openSession();
         try {
             tx = session.beginTransaction();
-            Query q = session.createSQLQuery("SELECT COUNT(*) FROM Biglietti B, Visite V WHERE B.CodiceVisita = V.CodiceVisita  AND  V.Tipo='E'  AND  B.CodiceVisita = ?").addEntity(Biglietto.class);
+            Query q = session.createSQLQuery("SELECT COUNT(*) FROM Biglietti B, Visite V WHERE B.CodiceVisita = V.CodiceVisita  AND  V.Tipo='E'  AND  B.CodiceVisita = ?").addEntity(Biglietto.class).addEntity(Visita.class);
             q.setParameter(0, codiceVisita);
             return (int) q.list().get(0);
         } catch (HibernateException e) {
