@@ -45,6 +45,9 @@
                         <li>Inizio evento: ${visita.getDataInizio()}</li>
                         <li>Fine evento: ${visita.getDataFine()}</li>
                     </ul>
+                    <h3>Info Visita:</h3>
+                    <p>Numero di biglietti prenotati per questa esposizione: ${num_biglietti}</p>
+                    <p>Ricavo vendita biglietti : ${soldi_biglietti} &euro;</p>
                     <%
                       }
                     %>
@@ -60,10 +63,7 @@
                       } else {
                         out.print("<button id='add-biglietti' class='btn btn-primary'>Acquista Biglietti</button>");
                       }
-                    %>
-                    <h3>Info Visita:</h3>
-                    <p>Numero di biglietti prenotati per questa esposizione: ${num_biglietti}</p>
-                    <p>Ricavo vendita biglietti : ${soldi_biglietti} &euro;</p>
+                    %>                    
                 </div>
 
             </div>
