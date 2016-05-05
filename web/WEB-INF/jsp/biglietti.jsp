@@ -26,7 +26,9 @@
                                 <p>Data di validit&agrave;: ${biglietto.getDataValidita()}</p>
                                 <p>Prenotato da: ${biglietto.getNomeUtente().nomeUtente}</p>
                                 <p>Categoria biglietto: ${biglietto.codiceCategoria.titolo}</p>
+                                <c:if test="${!biglietto.getServiziCollection().isEmpty()}">
                                 Servizi: <ul>
+                                </c:if>
                                     <c:forEach items="${biglietto.getServiziCollection()}" var="servizio">
                                         <li>${servizio.titolo}: ${servizio.prezzo}</li>
 
