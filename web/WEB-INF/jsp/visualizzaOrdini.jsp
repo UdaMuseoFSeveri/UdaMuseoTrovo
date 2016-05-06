@@ -32,6 +32,7 @@
                         <div class="panel-body">
                             <div class="col-lg-9">
                                 <h3 style="margin-top: 0px;">Codice Biglietto: ${ordine.getCodiceBiglietto()}</h3>
+                                <p><b>Data di prenotazione:</b> ${ordine.getDataPrenotazione()}</p>
                                 <p><b>Data di validit&agrave;:</b> ${ordine.getDataValidita()}</p>
                                 <p><b>Prenotato da:</b> ${ordine.getNomeUtente().nomeUtente}</p>
                                 <p><b>Categoria biglietto:</b> ${ordine.codiceCategoria.titolo} <b>Sconto: </b>${ordine.codiceCategoria.sconto}%</p>

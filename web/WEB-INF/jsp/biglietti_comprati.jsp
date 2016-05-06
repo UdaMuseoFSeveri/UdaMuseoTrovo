@@ -9,13 +9,15 @@
     </head>
     <body>     
         <jsp:include page="menu.jsp"/>
-
+        <%
+          float prezzoT = 0;
+        %>
         <!-- Page Content -->
         <div class="container">
 
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Biglietti</h1>
+                    <h1 class="page-header">Riepilogo Ordine</h1>
                 </div>
             </div>
             <div class="row">
@@ -25,7 +27,8 @@
                             <div class="panel-heading"><h3 class="panel-title">${biglietto.codiceVisita.titolo}</h3></div>
                             <div class="panel-body">
                                 <div class="col-lg-9">
-                                    <h3>Codice biglietto: ${biglietto.codiceBiglietto}</h3>
+                                    <h3 style="margin-top: 0px;">Codice biglietto: ${biglietto.codiceBiglietto}</h3>
+                                    <p><b>Data di prenotazione:</b> ${biglietto.getDataPrenotazione()}</p>
                                     <p><b>Data di validit&agrave;:</b> ${biglietto.getDataValidita()}</p>
                                     <p><b>Prenotato da:</b> ${biglietto.getNomeUtente().nomeUtente}</p>
                                     <p><b>Categoria biglietto:</b> ${biglietto.codiceCategoria.titolo} <b>Sconto: </b>${biglietto.codiceCategoria.sconto}%</p>
@@ -50,6 +53,7 @@
                                             pServizi += s.getPrezzo();
                                           }
                                           float prezzoFinale = prezzoVisita - (prezzoVisita * percSconto / 100) + pServizi;
+                                          prezzoT+=prezzoFinale;
                                           out.print(prezzoFinale);
                                         %>
                                         &euro;
@@ -58,6 +62,9 @@
                             </div>
                         </div>
                     </c:forEach>
+                    <div>
+                        <h3>Prezzo Totale: <% out.print(prezzoT); %> &euro;</h3>
+                    </div>
                     <h1>Stampa questa pagina</h1>
                     <h3>Presentala all'entrata del museo e dopo il pagamento potrai entrare</h3>
                 </div>

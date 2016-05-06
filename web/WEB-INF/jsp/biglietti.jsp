@@ -3,19 +3,21 @@
 <html>
     <head>
         <jsp:include page="head.jsp"/>
-        <title>Biglietti</title>
+        <title>Carrello</title>
     </head>
     <body>     
         <%@ page import="museo.db.Biglietto" %>
         <%@ page import="museo.db.Servizio" %>
         <jsp:include page="menu.jsp"/>
-
+        <%
+          float prezzoT = 0;
+        %>
         <!-- Page Content -->
         <div class="container">
 
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Biglietti</h1>
+                    <h1 class="page-header">Carrello</h1>
                 </div>
             </div>
             <div class="row">
@@ -41,17 +43,20 @@
                                 <div class="col-lg-3">
                                     <p class="price">
                                         <%
-                                        Biglietto b = (Biglietto) pageContext.getAttribute("biglietto");
-                                        float prezzoVisita = b.getCodiceVisita().getTariffa();
-                                        int percSconto = b.getCodiceCategoria().getSconto();
-                                        float pServizi =0;
-                                        for(Servizio s: b.getServiziCollection()){
-                                          pServizi+= s.getPrezzo();
-                                        }
-                                        float prezzoFinale = prezzoVisita - (prezzoVisita*percSconto/100) +pServizi ;
-                                        out.print(prezzoFinale);
+                                          Biglietto b = (Biglietto) pageContext.getAttribute("biglietto");
+                                          float prezzoVisita = b.getCodiceVisita().getTariffa();
+                                          int percSconto = b.getCodiceCategoria().getSconto();
+                                          float pServizi = 0;
+                                          if (b.getServiziCollection() != null) {
+                                            for (Servizio s : b.getServiziCollection()) {
+                                              pServizi += s.getPrezzo();
+                                            }
+                                          }
+                                          float prezzoFinale = prezzoVisita - (prezzoVisita * percSconto / 100) + pServizi;
+                                          prezzoT += prezzoFinale;
+                                          out.print(prezzoFinale);
                                         %>
-                                       &euro;
+                                        &euro;
                                     </p>
                                 </div>
 
@@ -61,9 +66,20 @@
 
                     </c:forEach>
 
-                    <a href='./visite' ><button class="btn btn-primary">Continua ad acquistare</button></a>
-                    <a href='./acquista' ><button class="btn btn-success">Completa l'acquisto</button></a>
-                    <a href='./svuotaCarrello' ><button class="btn btn-danger">Svuota il carrello</button></a>
+                    <c:if test="${tikets.isEmpty()}">
+                        <h2>Carrello vuoto!</h2>
+                        <br/><br/>
+                        <a href='./visite' ><button class="btn btn-primary">Vedi il catalogo</button></a>
+                    </c:if>
+                    <c:if test="${!tikets.isEmpty()}">
+                        <div style="text-align: right">
+                            <h3>Totale da pagare: <% out.print(prezzoT);%> &euro;</h3>
+                        </div>
+                        <a href='./visite' ><button class="btn btn-primary">Continua ad acquistare</button></a>
+                        <a href='./acquista' ><button class="btn btn-success">Completa l'acquisto</button></a>
+                        <a href='./svuotaCarrello' ><button class="btn btn-danger">Svuota il carrello</button></a>
+                    </c:if>
+
                 </div>
             </div>
 

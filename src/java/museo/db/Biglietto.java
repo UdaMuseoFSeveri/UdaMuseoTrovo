@@ -35,7 +35,7 @@ import javax.persistence.TemporalType;
         {
             @NamedQuery(
                     name = "getBiglietti",
-                    query = "FROM Biglietto B WHERE B.nomeUtente= :nome_Utente AND B.dataPrenotazione= :data_Prenotazione"
+                    query = "FROM Biglietto B WHERE B.nomeUtente=:nome_Utente AND B.dataPrenotazione=:data_Prenotazione"
             ),
             /**
             @NamedQuery(
