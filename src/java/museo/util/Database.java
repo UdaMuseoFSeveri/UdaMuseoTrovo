@@ -276,8 +276,9 @@ public class Database {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Query query = session.createSQLQuery("SELECT * FROM Biglietti WHERE NomeUtente= ? ORDER BY DataPrenotazione").addEntity(Biglietto.class);
+            Query query = session.createSQLQuery("SELECT * FROM Biglietti B WHERE NomeUtente= ? ORDER BY ? ASC").addEntity(Biglietto.class);
             query.setParameter(0, nomeUtente);
+            query.setParameter(1,"B.DataPrenotazione, B.Titolo");
             if (query.list().size() > 0) {
                 List<Biglietto> risultati = query.list();
                 return risultati;

@@ -45,21 +45,21 @@ public class BigliettiController {
             b.setDataPrenotazione(dataPrenotazione);
             db.salvaBiglietto(b);
         }
-        //status.setComplete();
         map.addAttribute("carrello", new ArrayList<>());
         System.out.println(utente.getNomeUtente());
-        List<Biglietto> bi = db.getBiglietti(dataPrenotazione, utente.getNomeUtente());
+        List<Biglietto> bi = db.getBiglietti(dataPrenotazione, "giacomo");
+        /*
         for(Biglietto b: bi){
             System.out.println(b);
-        }
-        map.put("biglietti", null);
+        }*/
+        map.put("biglietti", bi);
         return "biglietti_comprati";
 
     }
 
     @RequestMapping(value = "/svuotaCarrello", method = RequestMethod.GET)
-    public String svuotaCarrello(SessionStatus status) {
-        status.setComplete();
+    public String svuotaCarrello(ModelMap map) {
+        map.addAttribute("carrello", new ArrayList<>());
         return "redirect:/homepage";
 
     }
