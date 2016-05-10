@@ -71,9 +71,6 @@ public class VisitaController {
             biglietto.setServiziCollection(serv);
         }
         carrello.add(biglietto);
-        //db.salvaBiglietto(biglietto);
-        System.out.println(biglietto);
-        map.put("tikets", carrello);
         return "redirect:/carrello";
     }
 }

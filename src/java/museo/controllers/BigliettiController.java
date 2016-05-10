@@ -15,6 +15,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -25,8 +26,8 @@ public class BigliettiController {
     private Database db = new Database();
 
     @RequestMapping(value = "/carrello", method = RequestMethod.GET)
-    public String getBigliettiPrenotati(ModelMap map, @ModelAttribute("carrello") List<Biglietto> carrello) {
-        map.put("tikets", carrello);
+    public String getCarrello(ModelMap map, @ModelAttribute("carrello") List<Biglietto> carrello) {
+      map.put("tikets", carrello);
         return "biglietti";
 
     }
@@ -51,6 +52,12 @@ public class BigliettiController {
     public String svuotaCarrello(ModelMap map) {
         map.addAttribute("carrello", new ArrayList<>());
         return "redirect:/homepage";
+
+    }
+    @RequestMapping(value = "/removeBiglietto", method = RequestMethod.GET)
+    public String rimuoviBiglietto(ModelMap map,@ModelAttribute("carrello") List<Biglietto> carrello, @RequestParam(value="id",required=true)int id) {
+        carrello.remove(id);
+        return "redirect:/carrello";
 
     }
 }

@@ -318,7 +318,6 @@ public class Database {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        System.out.println(generatedPassword);
         return (generatedPassword);
     }
 
@@ -387,9 +386,7 @@ public class Database {
     
     public Date dataFine(Date dataInizio){
         long d = dataInizio.getTime();
-        System.out.println("data inizio: "+d);
         d+=2678400000L;
-        System.out.println("data fine: "+d);
         return new Date (d);
     }
 }

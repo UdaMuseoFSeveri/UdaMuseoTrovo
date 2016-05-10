@@ -30,15 +30,8 @@ public class AccessoController {
         if(nomeUtente != null && passwordCifrata != null ){
             int i;
             i = db.verificaUtente(new Utente(nomeUtente, passwordCifrata));
-           /**
-            String s= ""+i;
-            map.put("risposta",s);
-            map.put("utente",nomeUtente);
-            **/
-
             if (i == 1) {
                 map.put("risposta","Il nome utente è inesistente");
-
             }
             else if (i == 0) {
                 //login affettuato correttamente
@@ -51,8 +44,6 @@ public class AccessoController {
             }
         }
         return "login";
-        
-
     }
 
     @RequestMapping(value = "/registra", method = RequestMethod.POST)

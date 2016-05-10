@@ -76,10 +76,10 @@
                         </div><br/><br/><br/>
                         <table id="biglietti" class="table">
                             <tr>
-                                <th>Categoria</th>
-                                <th>Prezzo</th>
-                                <th>Validit&agrave;</th>
-                                <th>Servizi</th>
+                                <th>Categoria Biglietto</th>
+                                <th>Prezzo (&euro;)</th>
+                                <th>Data di validit&agrave;</th>
+                                <th>Servizi aggiuntivi</th>
                             </tr>
                             <tr id="b1">
                                 <td id="categoria">
@@ -115,7 +115,7 @@
                         <input name="codiceVisita" value="${visita.codiceVisita}" type="hidden" />
                         <input name="nomeUtente" type="hidden" value="${user.getNomeUtente()}" />
                         <input id="i-categoria" name="categoria" type="hidden" value="1" />
-                        <button type="submit" class="btn btn-info">Invia</button>
+                        <button type="submit" class="btn btn-info">Acquista</button>
 
                     </form>
                 </div>

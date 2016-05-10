@@ -22,9 +22,18 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
+                    <c:set var="id" value="0" ></c:set>
                     <c:forEach items="${tikets}" var="biglietto">
                         <div class="panel panel-default">
-                            <div class="panel-heading"><h3 class="panel-title">${biglietto.codiceVisita.titolo}</h3></div>
+                            <div class="panel-heading">
+                                <!--<div class="col-lg-11">-->
+                                <h3 class="panel-title">${biglietto.codiceVisita.titolo}</h3>
+                                <!--</div>
+                                <div clas="col-lg-1">
+                                    <a style="text-align:left;" href="./removeBiglietto?id=${id}"><button class="btn-danger">Rimuovi</button></a>
+                                </div>-->
+
+                            </div>
                             <div class="panel-body">
                                 <div class="col-lg-9">
                                     <p><b>Data di validit&agrave;:</b> ${biglietto.getDataValidita()}</p>
@@ -40,7 +49,7 @@
                                         </c:forEach>
                                     </ul>
                                 </div>
-                                <div class="col-lg-3">
+                                <div  class="col-lg-3">
                                     <p class="price">
                                         <%
                                           Biglietto b = (Biglietto) pageContext.getAttribute("biglietto");
@@ -58,12 +67,13 @@
                                         %>
                                         &euro;
                                     </p>
+                                    <a href="./removeBiglietto?id=${id}"><button style="margin-left:70px;" class="btn btn-danger">Rimuovi</button></a>
                                 </div>
 
 
                             </div>
                         </div>
-
+                        <c:set var="id" value="${id+1}" ></c:set>
                     </c:forEach>
 
                     <c:if test="${tikets.isEmpty()}">
