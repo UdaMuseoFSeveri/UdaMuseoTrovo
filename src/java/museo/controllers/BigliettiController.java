@@ -33,7 +33,7 @@ public class BigliettiController {
     }
 
     @RequestMapping(value = "/acquista", method = RequestMethod.GET)
-    public String completaAcquisto(ModelMap map, @ModelAttribute("carrello") List<Biglietto> carrello, @ModelAttribute("user") Utente utente, SessionStatus status) {
+    public String completaAcquisto(ModelMap map, @ModelAttribute("carrello") List<Biglietto> carrello, @ModelAttribute("user") Utente utente) {
         Timestamp dataPrenotazione = new Timestamp(System.currentTimeMillis());
         long millis = dataPrenotazione.getTime()-dataPrenotazione.getNanos()/1000000;
         dataPrenotazione = new Timestamp(millis);

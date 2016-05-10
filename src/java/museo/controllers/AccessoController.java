@@ -16,58 +16,56 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class AccessoController {
 
-    private Database db = new Database();
+  private Database db = new Database();
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginPage(ModelMap map, @RequestParam(value = "utente", required = false) String nomeUtente, @RequestParam(value = "password", required = false) String password) {
-                return "login";
-    }
+  @RequestMapping(value = "/login", method = RequestMethod.GET)
+  public String loginPage(ModelMap map) {
+    return "login";
+  }
 
-    @RequestMapping(value = "/verificaLogin", method = RequestMethod.POST)
-    public String verificaLogin(ModelMap map, @RequestParam(value = "utente", required = true) String nomeUtente, @RequestParam(value = "password", required = true) String password) {
-        String passwordCifrata=db.cifraPassword(password);
-        
-        if(nomeUtente != null && passwordCifrata != null ){
-            int i;
-            i = db.verificaUtente(new Utente(nomeUtente, passwordCifrata));
-            if (i == 1) {
-                map.put("risposta","Il nome utente è inesistente");
-            }
-            else if (i == 0) {
-                //login affettuato correttamente
-               map.put("username",nomeUtente);
-               map.put("accesso",true);
-            }else{
-               map.put("risposta","La password è errata");
-               return "login";
+  @RequestMapping(value = "/verificaLogin", method = RequestMethod.POST)
+  public String verificaLogin(ModelMap map, @RequestParam(value = "utente", required = true) String nomeUtente, @RequestParam(value = "password", required = true) String password) {
+    String passwordCifrata = db.cifraPassword(password);
 
-            }
-        }
+    if (nomeUtente != null && passwordCifrata != null) {
+      int i;
+      i = db.verificaUtente(new Utente(nomeUtente, passwordCifrata));
+      if (i == 1) {
+        map.put("risposta", "Il nome utente è inesistente");
+      } else if (i == 0) {
+        //login affettuato correttamente
+        map.put("username", nomeUtente);
+        map.put("accesso", true);
+      } else {
+        map.put("risposta", "La password è errata");
         return "login";
-    }
 
-    @RequestMapping(value = "/registra", method = RequestMethod.POST)
-    public String registra(ModelMap map, @RequestParam(value = "utente", required = true) String nomeUtente, @RequestParam(value = "password", required = true) String password, @RequestParam(value = "verificaPassword", required = true) String verificaPassword) {
-        String pass=db.cifraPassword(password);
-        String verPassword=db.cifraPassword(verificaPassword);
-        
-        if (0 == db.utenteEsistente(nomeUtente)) {
-            if (pass.equals(verPassword)) {
-                db.salvaUtente(new Utente(nomeUtente, pass));
-                return "login";
-            } else {
-                map.put("risposta","La password non coincide");
-            }
-        } else {
-            map.put("risposta","Nome utente già esistente");
-        }
+      }
+    }
+    return "login";
+  }
+
+  @RequestMapping(value = "/registra", method = RequestMethod.POST)
+  public String registra(ModelMap map, @RequestParam(value = "utente", required = true) String nomeUtente, @RequestParam(value = "password", required = true) String password, @RequestParam(value = "verificaPassword", required = true) String verificaPassword) {
+    String pass = db.cifraPassword(password);
+    String verPassword = db.cifraPassword(verificaPassword);
+
+    if (0 == db.utenteEsistente(nomeUtente)) {
+      if (pass.equals(verPassword)) {
+        db.salvaUtente(new Utente(nomeUtente, pass));
         return "login";
-                
+      } else {
+        map.put("risposta", "La password non coincide");
+      }
+    } else {
+      map.put("risposta", "Nome utente già esistente");
     }
+    return "login";
 
-     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(ModelMap map) {
-        return "logout";
-    }
+  }
+
+  @RequestMapping(value = "/logout", method = RequestMethod.GET)
+  public String logout(ModelMap map) {
+    return "logout";
+  }
 }
-
