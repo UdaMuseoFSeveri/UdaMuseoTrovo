@@ -18,10 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-/**
- *
- * @author FSEVERI\magro3026
- */
 @Controller
 @SessionAttributes({"carrello", "user"})
 public class BigliettiController {
@@ -37,29 +33,23 @@ public class BigliettiController {
 
     @RequestMapping(value = "/acquista", method = RequestMethod.GET)
     public String completaAcquisto(ModelMap map, @ModelAttribute("carrello") List<Biglietto> carrello, @ModelAttribute("user") Utente utente, SessionStatus status) {
-        /*if (!map.containsAttribute("carrello")) {
-            map.addAttribute("carrello", new ArrayList<Biglietto>());
-        }*/
         Timestamp dataPrenotazione = new Timestamp(System.currentTimeMillis());
+        long millis = dataPrenotazione.getTime()-dataPrenotazione.getNanos()/1000000;
+        dataPrenotazione = new Timestamp(millis);
         for (Biglietto b : carrello) {
             b.setDataPrenotazione(dataPrenotazione);
             db.salvaBiglietto(b);
         }
-        //status.setComplete();
         map.addAttribute("carrello", new ArrayList<>());
-        System.out.println(utente.getNomeUtente());
-        List<Biglietto> bi = db.getBiglietti(dataPrenotazione, utente.getNomeUtente());
-        for(Biglietto b: bi){
-            System.out.println(b);
-        }
-        map.put("biglietti", null);
+        List<Biglietto> bi = db.getBiglietti(dataPrenotazione,utente);
+        map.put("biglietti", bi);
         return "biglietti_comprati";
 
     }
 
     @RequestMapping(value = "/svuotaCarrello", method = RequestMethod.GET)
-    public String svuotaCarrello(SessionStatus status) {
-        status.setComplete();
+    public String svuotaCarrello(ModelMap map) {
+        map.addAttribute("carrello", new ArrayList<>());
         return "redirect:/homepage";
 
     }

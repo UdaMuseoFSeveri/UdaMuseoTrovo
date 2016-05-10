@@ -6,6 +6,7 @@
 package museo.db;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -25,8 +26,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -36,7 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
         {
             @NamedQuery(
                     name = "getBiglietti",
-                    query = "FROM Biglietto B WHERE B.nomeUtente= :nome_Utente AND B.dataPrenotazione= :data_Prenotazione"
+                    query = "FROM Biglietto B WHERE B.nomeUtente=:nome_Utente AND B.dataPrenotazione=:data_Prenotazione"
             ),
             /**
             @NamedQuery(
@@ -78,8 +77,8 @@ public class Biglietto implements Serializable {
     private Date dataValidita;
     @Basic(optional = false)
     @Column(name = "DataPrenotazione")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dataPrenotazione;
+    //@Temporal(TemporalType.TIMESTAMP)
+    private Timestamp dataPrenotazione;
     
     @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(name = "Aggiunta", joinColumns = {
@@ -104,7 +103,7 @@ public class Biglietto implements Serializable {
         this.codiceBiglietto = codiceBiglietto;
     }
 
-    public Biglietto(Integer codiceBiglietto, Date dataValidita, Date dataPrenotazione) {
+    public Biglietto(Integer codiceBiglietto, Date dataValidita, Timestamp dataPrenotazione) {
         this.codiceBiglietto = codiceBiglietto;
         this.dataValidita = dataValidita;
         this.dataPrenotazione = dataPrenotazione;
@@ -126,11 +125,11 @@ public class Biglietto implements Serializable {
         this.dataValidita = dataValidita;
     }
 
-    public Date getDataPrenotazione() {
+    public Timestamp getDataPrenotazione() {
         return dataPrenotazione;
     }
 
-    public void setDataPrenotazione(Date dataPrenotazione) {
+    public void setDataPrenotazione(Timestamp dataPrenotazione) {
         this.dataPrenotazione = dataPrenotazione;
     }
 

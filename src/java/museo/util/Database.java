@@ -88,15 +88,19 @@ public class Database {
         }
     }
 
-    public List<Biglietto> getBiglietti(Timestamp timestamp, String username) {
+    public List<Biglietto> getBiglietti(Timestamp timestamp, Utente username) {
         Transaction tx = null;
         Session session = factory.openSession();
         try {
             tx = session.beginTransaction();
             Query q = session.getNamedQuery("getBiglietti");
-            q.setParameter("nome_Utente", username);
-            q.setParameter("data_Prenotazione", timestamp);
-            return q.list();
+            q.setString("nome_Utente", username.getNomeUtente() );
+            q.setParameter("data_Prenotazione",timestamp);
+            if (q.list().size() > 0) {
+                List<Biglietto> risultati = q.list();
+                tx.commit();
+                return risultati;
+            }
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -276,8 +280,9 @@ public class Database {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Query query = session.createSQLQuery("SELECT * FROM Biglietti WHERE NomeUtente= ? ORDER BY DataPrenotazione").addEntity(Biglietto.class);
+            Query query = session.createSQLQuery("SELECT * FROM Biglietti B WHERE NomeUtente= ? ORDER BY ? ASC").addEntity(Biglietto.class);
             query.setParameter(0, nomeUtente);
+            query.setParameter(1,"B.DataPrenotazione, B.Titolo");
             if (query.list().size() > 0) {
                 List<Biglietto> risultati = query.list();
                 return risultati;
