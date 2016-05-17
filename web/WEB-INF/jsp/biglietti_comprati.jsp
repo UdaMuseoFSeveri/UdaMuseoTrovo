@@ -32,7 +32,7 @@
                                     <p><b>Data di validit&agrave;:</b> ${biglietto.getDataValidita()}</p>
                                     <p><b>Prenotato da:</b> ${biglietto.getNomeUtente().nomeUtente}</p>
                                     <p><b>Categoria biglietto:</b> ${biglietto.codiceCategoria.titolo} <b>Sconto: </b>${biglietto.codiceCategoria.sconto}%</p>
-                                    <p><b>Prezzo biglietto:</b> ${biglietto.codiceVisita.tariffa} &euro;</p>
+                                    <p><b>Prezzo visita:</b> ${biglietto.codiceVisita.tariffa} &euro;</p>
                                     <c:if test="${!biglietto.getServiziCollection().isEmpty()}">
                                         <b>Servizi:</b> <ul>
                                         </c:if>

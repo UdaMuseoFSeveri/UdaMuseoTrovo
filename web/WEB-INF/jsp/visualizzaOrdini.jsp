@@ -36,7 +36,7 @@
                                 <p><b>Data di validit&agrave;:</b> ${ordine.getDataValidita()}</p>
                                 <p><b>Prenotato da:</b> ${ordine.getNomeUtente().nomeUtente}</p>
                                 <p><b>Categoria biglietto:</b> ${ordine.codiceCategoria.titolo} <b>Sconto: </b>${ordine.codiceCategoria.sconto}%</p>
-                                <p><b>Prezzo biglietto:</b> ${ordine.codiceVisita.tariffa} &euro;</p>
+                                <p><b>Prezzo visita:</b> ${ordine.codiceVisita.tariffa} &euro;</p>
                                 <c:if test="${!ordine.getServiziCollection().isEmpty()}">
                                     <b>Servizi:</b> <ul>
                                     </c:if>
